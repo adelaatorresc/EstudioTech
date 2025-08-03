@@ -2,83 +2,109 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Estudio Tech</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Estudio Tech | Recomendaciones de Tecnología para Estudiantes y Trabajadores</title>
 <style>
+  :root {
+    --primary-color: #0070f3;
+    --secondary-color: #004aad;
+    --background-color: #f5f7fa;
+    --card-bg-color: #ffffff;
+    --text-color: #333;
+    --light-text-color: #666;
+    --hover-bg-color: #e6f0ff;
+    --border-color: #ddd;
+    --button-buy-color: #0070f3;
+    --button-contact-color: #004aad;
+  }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    font-family: Arial, sans-serif;
-    background-color: #f5f7fa;
-    color: #333;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
   }
   header {
-    background: linear-gradient(90deg,#004aad,#0070f3);
+    background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
     color: white;
-    padding: 1rem;
+    padding: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
   }
+  header h1 { font-size: 1.8rem; }
   .menu-btn {
-    font-size: 1.8rem;
+    font-size: 2rem;
     cursor: pointer;
   }
-  h1 { font-size: 1.5rem; }
-  /* Sidebar */
   .sidebar {
     height: 100%;
     width: 0;
     position: fixed;
     top: 0; left: 0;
-    background-color: #003080;
+    background-color: var(--secondary-color);
     overflow-x: hidden;
-    transition: 0.3s;
-    padding-top: 60px;
+    transition: 0.4s;
+    padding-top: 70px;
     z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.2);
   }
   .sidebar a, .sidebar label {
-    padding: 10px 20px;
+    padding: 12px 24px;
     display: block;
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: white;
     transition: 0.2s;
     cursor: pointer;
+    font-weight: 500;
   }
   .sidebar a:hover, .sidebar label:hover {
-    background-color: #004aad;
+    background-color: #004099;
   }
   .close-btn {
     position: absolute;
-    top: 10px; right: 20px;
-    font-size: 1.5rem;
+    top: 15px; right: 25px;
+    font-size: 2rem;
     cursor: pointer;
     color: white;
   }
-  /* Filtros */
   .filter-section {
-    padding: 10px 20px;
-    color: white;
+    padding: 20px 24px;
+    border-top: 1px solid #0055b8;
+  }
+  .filter-section label {
+    display: block;
+    padding: 0;
+    margin-bottom: 5px;
   }
   .filter-section input {
-    width: 90%;
-    padding: 5px;
-    margin: 5px 0;
-    border-radius: 4px;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border-radius: 6px;
     border: none;
+    font-size: 1rem;
   }
-  /* Grid productos */
-  main { padding: 1rem; }
+  main {
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
   .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
   }
   .product-card {
-    background-color: white;
-    border-radius: 8px;
+    background-color: var(--card-bg-color);
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 0;
@@ -89,26 +115,31 @@
     transform: translateY(0);
   }
   .product-card:hover {
-    transform: scale(1.03);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   }
   .product-card img {
     width: 100%;
-    height: 150px;
+    height: 180px;
     object-fit: cover;
   }
   .product-card .info {
-    padding: 0.7rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: calc(100% - 180px);
   }
   .product-card .info h4 {
-    font-size: 1rem;
-    margin-bottom: 0.3rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    color: var(--secondary-color);
   }
   .product-card .info p {
-    color: #0070f3;
+    color: var(--primary-color);
     font-weight: bold;
+    font-size: 1.1rem;
   }
-  /* Modal */
   .modal {
     display: none;
     position: fixed;
@@ -116,61 +147,123 @@
     padding-top: 50px;
     left: 0; top: 0;
     width: 100%; height: 100%;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(0,0,0,0.7);
     animation: fadeIn 0.3s ease;
+    overflow-y: auto;
   }
-  @keyframes fadeIn { from {opacity:0} to {opacity:1} }
   .modal-content {
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     margin: auto;
-    padding: 20px;
-    border-radius: 8px;
-    max-width: 600px;
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 700px;
     position: relative;
     animation: slideUp 0.3s ease;
   }
-  @keyframes slideUp { from {transform: translateY(50px);} to {transform: translateY(0);} }
   .modal-close {
     position: absolute;
-    right: 15px; top: 10px;
-    font-size: 1.5rem;
+    right: 20px; top: 15px;
+    font-size: 2rem;
     cursor: pointer;
+    color: var(--light-text-color);
   }
-  .comments-section { margin-top: 1rem; }
-  .comment {
-    background: #f0f4ff;
-    padding: 8px;
-    border-radius: 4px;
-    margin-bottom: 5px;
+  .modal-close:hover { color: var(--text-color); }
+  #modalTitle { font-size: 2rem; margin-bottom: 1rem; }
+  #modalDescription { color: var(--light-text-color); margin-bottom: 1rem; }
+  .modal-features, .modal-recommendations {
+    margin-top: 1rem;
+    padding-left: 20px;
   }
+  .modal-features ul { list-style: disc; padding-left: 20px; }
+  .modal-features li { margin-bottom: 5px; }
+  .modal-recommendations strong { color: var(--secondary-color); }
   .buy-btn {
     display: inline-block;
-    padding: 10px 15px;
-    background-color: #0070f3;
+    padding: 12px 20px;
+    background-color: var(--button-buy-color);
     color: white;
-    border-radius: 4px;
+    border-radius: 6px;
     text-decoration: none;
-    margin-top: 10px;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: 1.5rem;
+    transition: background-color 0.2s ease;
   }
-  .buy-btn:hover {
-    background-color: #0057b8;
+  .buy-btn:hover { background-color: #0057b8; }
+  .comments-section {
+    margin-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
   }
+  .comments-section h3 { margin-bottom: 1rem; color: var(--secondary-color); }
+  .comment {
+    background: var(--hover-bg-color);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .comment strong { color: var(--secondary-color); }
   form input, form textarea {
     width: 100%;
-    padding: 6px;
-    margin: 5px 0;
-    border-radius: 4px;
-    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
   }
   form button {
-    background-color: #004aad;
+    background-color: var(--button-contact-color);
     color: white;
-    padding: 7px 12px;
+    padding: 12px 20px;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
   }
   form button:hover { background-color: #002f6c; }
+
+  /* Secciones adicionales */
+  .section-container {
+    background-color: var(--card-bg-color);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    margin-top: 2rem;
+  }
+  .section-container h2 {
+    font-size: 2rem;
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .section-container h3 {
+    color: var(--primary-color);
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .contact-info {
+    text-align: center;
+  }
+  .contact-info p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  .contact-info a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+  @media (max-width: 768px) {
+    header h1 { font-size: 1.2rem; }
+    .products-grid { grid-template-columns: 1fr; }
+    .modal-content { padding: 20px; }
+  }
 </style>
 </head>
 <body>
@@ -181,44 +274,83 @@
 
 <div id="sidebar" class="sidebar">
   <span class="close-btn" onclick="closeMenu()">×</span>
-  <a onclick="setCategory('all')">Todos</a>
+  <a onclick="setCategory('all')">Todos los productos</a>
   <a onclick="setCategory('portatiles')">Portátiles</a>
   <a onclick="setCategory('moviles')">Móviles</a>
   <a onclick="setCategory('auriculares')">Auriculares</a>
   <a onclick="setCategory('accesorios')">Accesorios</a>
-
+  <hr style="border-color: #0055b8;">
   <div class="filter-section">
-    <label>Precio mín:</label>
-    <input type="number" id="minPrice" placeholder="€" />
-    <label>Precio máx:</label>
-    <input type="number" id="maxPrice" placeholder="€" />
+    <label>Precio mínimo (€):</label>
+    <input type="number" id="minPrice" placeholder="0" min="0" />
+    <label>Precio máximo (€):</label>
+    <input type="number" id="maxPrice" placeholder="9999" min="0" />
   </div>
-
   <div class="filter-section">
-    <label>Buscar producto:</label>
-    <input type="text" id="searchText" placeholder="Escribe un nombre" />
+    <label>Buscar por nombre:</label>
+    <input type="text" id="searchText" placeholder="Ej: MacBook Air" />
   </div>
 </div>
 
 <main>
-  <div class="products-grid" id="productsGrid"></div>
+  <div class="section-container">
+    <h2>Recomendaciones por Perfil de Estudiante o Profesional</h2>
+    <p>Encuentra el dispositivo perfecto para tus necesidades. Elige un perfil para ver recomendaciones especializadas.</p>
+    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
+      <button class="buy-btn" onclick="filterByProfile('estudiante_ingenieria')">Ingeniería</button>
+      <button class="buy-btn" onclick="filterByProfile('disenador_grafico')">Diseño Gráfico</button>
+      <button class="buy-btn" onclick="filterByProfile('escritor_viajero')">Escritor/Viajero</button>
+    </div>
+  </div>
+  
+  <div id="productsGrid" class="products-grid"></div>
+  
+  <div class="section-container" id="contactSection">
+    <h2>Contacto</h2>
+    <div class="contact-info">
+      <p>Si tienes alguna duda o necesitas una recomendación personalizada, no dudes en contactarme:</p>
+      <p><strong>Correo electrónico:</strong> <a href="mailto:adelatc1612@gmail.com">adelatc1612@gmail.com</a></p>
+      <p><strong>Teléfono:</strong> <a href="tel:+34683188695">683 188 695</a></p>
+    </div>
+  </div>
+
+  <div class="section-container" id="aboutSection" style="display: none;">
+    <h2>Sobre Nosotros</h2>
+    <p>
+      Estudio Tech nació con el objetivo de ser tu guía de confianza en el mundo de la tecnología. Sabemos que elegir el equipo adecuado puede ser un desafío, especialmente para estudiantes y profesionales que buscan el mejor equilibrio entre rendimiento, precio y portabilidad.
+    </p>
+    <p>
+      Aquí, no solo encontrarás productos, sino análisis detallados, recomendaciones personalizadas y una comunidad para compartir opiniones.
+    </p>
+  </div>
 </main>
 
-<!-- Modal -->
 <div id="productModal" class="modal">
   <div class="modal-content">
     <span class="modal-close" onclick="closeModal()">×</span>
     <h2 id="modalTitle"></h2>
-    <img id="modalImage" src="" alt="" style="width:100%;max-height:250px;object-fit:cover;" />
+    <img id="modalImage" src="" alt="" style="width:100%;max-height:300px;object-fit:cover;border-radius:8px;margin-bottom:1rem;" />
     <p id="modalDescription"></p>
-    <a id="modalLink" href="#" target="_blank" class="buy-btn">Comprar</a>
+    
+    <div class="modal-features">
+      <h3>Características clave:</h3>
+      <ul id="modalFeaturesList"></ul>
+    </div>
+    
+    <div class="modal-recommendations">
+      <h3>Recomendado para:</h3>
+      <p id="modalRecommendationsText"></p>
+    </div>
+    
+    <a id="modalLink" href="#" target="_blank" class="buy-btn">Ver y Comprar en tienda</a>
+    
     <div class="comments-section">
-      <h3>Comentarios</h3>
+      <h3>Valoraciones y comentarios</h3>
       <div id="commentsList"></div>
       <form id="commentForm">
         <input type="text" id="commentName" placeholder="Tu nombre" required />
-        <textarea id="commentText" placeholder="Tu comentario" required></textarea>
-        <button type="submit">Enviar</button>
+        <textarea id="commentText" placeholder="Comparte tu opinión sobre este producto..." required></textarea>
+        <button type="submit">Enviar comentario</button>
       </form>
     </div>
   </div>
@@ -226,14 +358,70 @@
 
 <script>
 const products = [
-  {id:1,name:"Lenovo IdeaPad 3",price:599,category:"portatiles",image:"https://img.pccomponentes.com/articles/1006/10064372/1006-lenovo-ideapad-3-15itl6-intel-core-i5-1135g7-8gb-512gb-ssd-156.jpg",description:"Intel i5, 8GB RAM, 512GB SSD. Ideal para estudiantes que buscan equilibrio.",link:"https://www.pccomponentes.com/lenovo-ideapad-3"},
-  {id:2,name:"MacBook Air M1",price:1099,category:"portatiles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mb-air-spacegray-select-202011?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1603332211000",description:"Chip M1, 8GB RAM, 256GB SSD. Rendimiento y autonomía excepcionales.",link:"https://www.apple.com/es/macbook-air-m1/"},
-  {id:3,name:"iPhone 14",price:999,category:"moviles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-blue-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1663703842785",description:"Pantalla 6.1\", A15 Bionic, cámara avanzada. Ideal para ecosistema Apple.",link:"https://www.apple.com/es/iphone-14/"},
-  {id:4,name:"Samsung Galaxy S22",price:849,category:"moviles",image:"https://images.samsung.com/is/image/samsung/p6pim/es/2202/gallery/es-galaxy-s22-s901-sm-s901bzkdeub-530682271?$650_519_PNG$",description:"Pantalla 6.1\", Exynos 2200, cámara triple. Android potente y versátil.",link:"https://www.samsung.com/es/smartphones/galaxy-s22/"},
-  {id:5,name:"Sony WH-1000XM4",price:279,category:"auriculares",image:"https://www.sony.es/image/93bbce75e54b89c8f7e60d8cb5c4c881?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",description:"Cancelación activa de ruido y 30 horas de batería. Perfectos para concentración.",link:"https://www.sony.es/electronics/auriculares-diademas/wh-1000xm4"},
-  {id:6,name:"Apple AirPods Pro",price:249,category:"auriculares",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-pro-2nd-gen-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1660803965869",description:"Cancelación activa, modo transparencia, integración perfecta con Apple.",link:"https://www.apple.com/es/airpods-pro/"},
-  {id:7,name:"Logitech MX Master 3",price:99,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3/gallery/mx-master-3-top-view-graphite.png?v=1",description:"Ratón ergonómico y preciso. Perfecto para largas jornadas de estudio o trabajo.",link:"https://www.logitech.com/es-es/products/mice/mx-master-3.html"},
-  {id:8,name:"Teclado Logitech K380",price:39,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/keyboards/k380/gallery/k380-keyboard-top-view-rose-gallery.png?v=1",description:"Teclado Bluetooth compacto multi-dispositivo.",link:"https://www.logitech.com/es-es/products/keyboards/k380.html"}
+  {id:1,name:"Lenovo IdeaPad 3",price:599,category:"portatiles",image:"https://img.pccomponentes.com/articles/1006/10064372/1006-lenovo-ideapad-3-15itl6-intel-core-i5-1135g7-8gb-512gb-ssd-156.jpg",description:"Un portátil versátil con un equilibrio perfecto entre rendimiento y precio. Ideal para tareas cotidianas, programación básica y multimedia.",link:"https://www.pccomponentes.com/lenovo-ideapad-3",
+   features:["Intel i5 de 11ª generación", "8 GB RAM", "512 GB SSD", "Pantalla de 15.6 pulgadas"],
+   recommendations:{
+     estudiante_ingenieria: "No recomendado para software de simulación pesada, pero suficiente para programación básica y ofimática.",
+     disenador_grafico: "No recomendado. Requiere más potencia gráfica y una pantalla de mejor calidad.",
+     escritor_viajero: "Excelente opción por su relación calidad-precio y portabilidad moderada."
+   }
+  },
+  {id:2,name:"MacBook Air M1",price:1099,category:"portatiles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mb-air-spacegray-select-202011?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1603332211000",description:"El MacBook Air con el chip M1 ofrece un rendimiento increíble con una autonomía de batería excepcional. Un diseño delgado y ligero lo hace el compañero perfecto para el día a día.",link:"https://www.apple.com/es/macbook-air-m1/",
+   features:["Chip Apple M1", "8 GB RAM unificada", "256 GB SSD", "Pantalla Retina de 13.3 pulgadas"],
+   recommendations:{
+     estudiante_ingenieria: "Bueno para programación y tareas ligeras, pero podría quedarse corto para software de modelado 3D intensivo.",
+     disenador_grafico: "Fantástico para tareas de diseño gracias a su excelente pantalla y optimización del software.",
+     escritor_viajero: "La mejor opción por su increíble duración de batería, peso ligero y teclado cómodo."
+   }
+  },
+  {id:3,name:"iPhone 14",price:999,category:"moviles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-blue-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1663703842785",description:"Un smartphone potente y fiable con una cámara mejorada y el chip A15 Bionic. Ideal para aquellos inmersos en el ecosistema de Apple.",link:"https://www.apple.com/es/iphone-14/",
+   features:["Pantalla Super Retina XDR de 6.1 pulgadas", "Chip A15 Bionic", "Cámara dual de 12 MP", "Face ID"],
+   recommendations:{
+     estudiante_ingenieria: "Excelente para el día a día y productividad, con acceso a apps específicas.",
+     disenador_grafico: "Ideal para capturar fotos de alta calidad y usar aplicaciones creativas en movimiento.",
+     escritor_viajero: "Una cámara fantástica para documentar viajes y una batería que dura todo el día."
+   }
+  },
+  {id:4,name:"Samsung Galaxy S22",price:849,category:"moviles",image:"https://images.samsung.com/is/image/samsung/p6pim/es/2202/gallery/es-galaxy-s22-s901-sm-s901bzkdeub-530682271?$650_519_PNG$",description:"El Galaxy S22 es un buque insignia Android que destaca por su cámara de alta calidad y su rendimiento excepcional. Una opción versátil y completa.",link:"https://www.samsung.com/es/smartphones/galaxy-s22/",
+   features:["Pantalla Dynamic AMOLED 2X de 6.1 pulgadas", "Procesador Exynos 2200", "Cámara triple de 50 MP", "Batería de 3700 mAh"],
+   recommendations:{
+     estudiante_ingenieria: "Gran rendimiento para aplicaciones técnicas y una cámara potente para proyectos.",
+     disenador_grafico: "Su pantalla vibrante y su potente cámara lo hacen ideal para la creación de contenido.",
+     escritor_viajero: "Una opción robusta con una cámara versátil para capturar cada momento."
+   }
+  },
+  {id:5,name:"Sony WH-1000XM4",price:279,category:"auriculares",image:"https://www.sony.es/image/93bbce75e54b89c8f7e60d8cb5c4c881?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",description:"Los auriculares de referencia en cancelación de ruido. Son perfectos para sumergirte en el estudio o el trabajo, bloqueando el ruido exterior por completo.",link:"https://www.sony.es/electronics/auriculares-diademas/wh-1000xm4",
+   features:["Cancelación activa de ruido líder", "30 horas de batería", "Sonido de alta calidad", "Detección de voz para pausa automática"],
+   recommendations:{
+     estudiante_ingenieria: "Indispensables para concentrarse en la biblioteca o espacios ruidosos.",
+     disenador_grafico: "Perfectos para trabajar con música, sin distracciones del entorno.",
+     escritor_viajero: "Un must-have para viajes, eliminando el ruido del transporte para una experiencia más relajada."
+   }
+  },
+  {id:6,name:"Apple AirPods Pro",price:249,category:"auriculares",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-pro-2nd-gen-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1660803965869",description:"Los AirPods Pro ofrecen cancelación de ruido y un modo de transparencia, todo en un diseño compacto. La integración con dispositivos Apple es perfecta.",link:"https://www.apple.com/es/airpods-pro/",
+   features:["Cancelación activa de ruido", "Modo de sonido ambiente", "Audio espacial personalizado", "Resistencia al sudor y al agua"],
+   recommendations:{
+     estudiante_ingenieria: "Útiles para llamadas y escuchar clases, pero los Sony son mejores para la concentración total.",
+     disenador_grafico: "Ideal para el día a día, con la comodidad de su tamaño y la integración con el ecosistema Apple.",
+     escritor_viajero: "Perfectos por su portabilidad y versatilidad en cualquier situación."
+   }
+  },
+  {id:7,name:"Logitech MX Master 3",price:99,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3/gallery/mx-master-3-top-view-graphite.png?v=1",description:"Un ratón ergonómico diseñado para la productividad. Su rueda de desplazamiento MagSpeed es ultra-rápida y su diseño se adapta a la mano.",link:"https://www.logitech.com/es-es/products/mice/mx-master-3.html",
+   features:["Rueda de desplazamiento MagSpeed", "Diseño ergonómico", "Conectividad multi-dispositivo", "Botones personalizables"],
+   recommendations:{
+     estudiante_ingenieria: "Indispensable para un trabajo de precisión en software CAD o de diseño técnico.",
+     disenador_grafico: "Mejora la eficiencia en programas de edición de fotos y diseño, reduciendo la fatiga.",
+     escritor_viajero: "Excelente para largas horas de trabajo, pero quizás demasiado grande para un viaje ligero."
+   }
+  },
+  {id:8,name:"Teclado Logitech K380",price:39,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/keyboards/k380/gallery/k380-keyboard-top-view-rose-gallery.png?v=1",description:"Un teclado Bluetooth compacto y ligero, perfecto para trabajar con tu móvil, tablet o portátil en cualquier lugar. Puedes cambiar de dispositivo con un solo botón.",link:"https://www.logitech.com/es-es/products/keyboards/k380.html",
+   features:["Diseño compacto y ligero", "Conexión Bluetooth a 3 dispositivos", "Batería de larga duración", "Teclas cómodas y silenciosas"],
+   recommendations:{
+     estudiante_ingenieria: "Útil como teclado secundario, pero un teclado de tamaño completo es mejor para largas sesiones de codificación.",
+     disenador_grafico: "Una opción portátil y elegante para cuando no estás en tu escritorio principal.",
+     escritor_viajero: "El compañero de viaje ideal para escribir en tu tablet o móvil sin llevar un portátil."
+   }
+  }
 ];
 
 const commentsData = {};
@@ -242,22 +430,10 @@ let currentMinPrice = 0;
 let currentMaxPrice = Infinity;
 let currentSearchText = "";
 
-// Menú
-function openMenu() {
-  document.getElementById("sidebar").style.width = "260px";
-}
-function closeMenu() {
-  document.getElementById("sidebar").style.width = "0";
-}
+function openMenu() { document.getElementById("sidebar").style.width = "260px"; }
+function closeMenu() { document.getElementById("sidebar").style.width = "0"; }
+function setCategory(cat) { currentCategory = cat; applyFilters(); closeMenu(); }
 
-// Set categoría
-function setCategory(cat) {
-  currentCategory = cat;
-  applyFilters();
-  closeMenu();
-}
-
-// Aplicar filtros
 function applyFilters() {
   currentMinPrice = parseFloat(document.getElementById("minPrice").value) || 0;
   currentMaxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
@@ -280,8 +456,10 @@ function applyFilters() {
     card.innerHTML = `
       <img src="${prod.image}" alt="${prod.name}" />
       <div class="info">
-        <h4>${prod.name}</h4>
-        <p>${prod.price} €</p>
+        <div>
+          <h4>${prod.name}</h4>
+          <p><strong>${prod.price} €</strong></p>
+        </div>
       </div>
     `;
     card.addEventListener("click", () => openProduct(prod.id));
@@ -289,12 +467,43 @@ function applyFilters() {
   });
 }
 
-// Búsqueda en tiempo real
+function filterByProfile(profile) {
+  currentCategory = "all";
+  currentMinPrice = 0;
+  currentMaxPrice = Infinity;
+  currentSearchText = "";
+  
+  document.getElementById("minPrice").value = "";
+  document.getElementById("maxPrice").value = "";
+  document.getElementById("searchText").value = "";
+
+  const grid = document.getElementById("productsGrid");
+  grid.innerHTML = "";
+  
+  const filtered = products.filter(p => p.recommendations[profile]);
+
+  filtered.forEach((prod, index) => {
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+    setTimeout(() => card.classList.add("visible"), index * 100);
+    card.innerHTML = `
+      <img src="${prod.image}" alt="${prod.name}" />
+      <div class="info">
+        <div>
+          <h4>${prod.name}</h4>
+          <p><strong>${prod.price} €</strong></p>
+        </div>
+      </div>
+    `;
+    card.addEventListener("click", () => openProduct(prod.id));
+    grid.appendChild(card);
+  });
+}
+
 document.getElementById("searchText").addEventListener("input", applyFilters);
 document.getElementById("minPrice").addEventListener("input", applyFilters);
 document.getElementById("maxPrice").addEventListener("input", applyFilters);
 
-// Modal producto
 function openProduct(id) {
   const prod = products.find(p => p.id === id);
   document.getElementById("modalTitle").textContent = prod.name;
@@ -302,13 +511,29 @@ function openProduct(id) {
   document.getElementById("modalDescription").textContent = prod.description;
   document.getElementById("modalLink").href = prod.link;
 
+  const featuresList = document.getElementById("modalFeaturesList");
+  featuresList.innerHTML = "";
+  prod.features.forEach(feature => {
+    const li = document.createElement("li");
+    li.textContent = feature;
+    featuresList.appendChild(li);
+  });
+  
+  const recommendationsText = document.getElementById("modalRecommendationsText");
+  let recommendationsHTML = "";
+  for (const profile in prod.recommendations) {
+    const profileName = profile.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
+    recommendationsHTML += `<strong>${profileName}:</strong> ${prod.recommendations[profile]}<br>`;
+  }
+  recommendationsText.innerHTML = recommendationsHTML;
+  
   const commentsList = document.getElementById("commentsList");
   commentsList.innerHTML = "";
   if (commentsData[id]) {
     commentsData[id].forEach(c => {
       const div = document.createElement("div");
       div.classList.add("comment");
-      div.textContent = `${c.name}: ${c.text}`;
+      div.innerHTML = `<strong>${c.name}:</strong> ${c.text}`;
       commentsList.appendChild(div);
     });
   }
@@ -321,7 +546,6 @@ function closeModal() {
   document.getElementById("productModal").style.display = "none";
 }
 
-// Comentarios
 document.getElementById("commentForm").addEventListener("submit", function(e) {
   e.preventDefault();
   const id = this.dataset.productId;
@@ -335,14 +559,12 @@ document.getElementById("commentForm").addEventListener("submit", function(e) {
   openProduct(parseInt(id));
 });
 
-// Cerrar modal clic fuera
 window.onclick = function(event) {
   if (event.target === document.getElementById("productModal")) {
     closeModal();
   }
 };
 
-// Iniciar con todos los productos
 applyFilters();
 </script>
 </body>
