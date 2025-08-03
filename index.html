@@ -1,1717 +1,401 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Estudio Tech | Asesoría en Tecnología para Estudiantes y Profesionales</title>
-    <link href="https://fonts.googleapis.com/css?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <style>
-        /* Estilos Generales y Variables CSS */
-        :root {
-            --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
-            --secondary-color: #1e293b;
-            --secondary-hover: #0f172a;
-            --background-color: #f8fafc;
-            --card-bg-color: #ffffff;
-            --text-color: #1e293b;
-            --light-text-color: #64748b;
-            --border-color: #e2e8f0;
-            --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
-            --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
-            --success-color: #10b981;
-            --warning-color: #f59e0b;
-            --danger-color: #ef4444;
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 16px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--background-color);
-            color: var(--text-color);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: var(--primary-hover);
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-sm);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            text-align: center;
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: var(--secondary-hover);
-            transform: translateY(-2px);
-        }
-        
-        .btn-outline {
-            background-color: transparent;
-            border: 2px solid var(--primary-color);
-            color: var(--primary-color);
-        }
-        
-        .btn-outline:hover {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 2rem;
-            color: var(--secondary-color);
-            position: relative;
-            display: inline-block;
-        }
-        
-        .section-title::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -10px;
-            width: 60%;
-            height: 4px;
-            background-color: var(--primary-color);
-            border-radius: 2px;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-center.section-title::after {
-            left: 20%;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.5rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .badge-new {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        .badge-popular {
-            background-color: var(--warning-color);
-            color: white;
-        }
-
-        .badge-sale {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        /* --- Header, Navegación y Sidebar */
-        header {
-            background: var(--card-bg-color);
-            padding: 1.25rem 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            box-shadow: var(--shadow-light);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .logo-icon {
-            color: var(--primary-color);
-            font-size: 2rem;
-        }
-
-        header h1 {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-        }
-
-        .main-nav {
-            display: flex;
-            gap: 2rem;
-        }
-        
-        .main-nav a {
-            font-weight: 600;
-            color: var(--text-color);
-            padding: 0.5rem 0;
-            position: relative;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .main-nav a:hover,
-        .main-nav a.active {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        .main-nav a::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: -5px;
-            width: 0;
-            height: 3px;
-            background-color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .main-nav a:hover::after,
-        .main-nav a.active::after {
-            width: 100%;
-        }
-
-        .dropdown {
-            position: relative;
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            background-color: white;
-            min-width: 220px;
-            box-shadow: var(--shadow-hover);
-            border-radius: var(--radius-sm);
-            z-index: 1;
-            padding: 0.5rem 0;
-        }
-
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-
-        .dropdown-content a {
-            color: var(--text-color);
-            padding: 0.75rem 1.5rem;
-            display: block;
-            font-size: 0.9rem;
-        }
-
-        .dropdown-content a:hover {
-            background-color: var(--background-color);
-        }
-        
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-        }
-
-        .search-bar {
-            position: relative;
-        }
-
-        .search-bar input {
-            padding: 0.75rem 1.5rem 0.75rem 3rem;
-            border-radius: 50px;
-            border: 1px solid var(--border-color);
-            font-size: 1rem;
-            min-width: 250px;
-            transition: var(--transition);
-        }
-
-        .search-bar input:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .search-bar i {
-            position: absolute;
-            left: 1rem;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--light-text-color);
-        }
-
-        .menu-btn {
-            font-size: 1.75rem;
-            cursor: pointer;
-            color: var(--text-color);
-            display: none;
-        }
-
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            background-color: var(--secondary-color);
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 80px;
-            z-index: 1001;
-            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-            color: white;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .sidebar .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 25px;
-            font-size: 2.5rem;
-            cursor: pointer;
-            color: white;
-        }
-        
-        .sidebar h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            padding: 1rem 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-        
-        .sidebar h3 i {
-            font-size: 1.1rem;
-        }
-
-        .sidebar a,
-        .sidebar label {
-            padding: 12px 30px;
-            display: block;
-            text-decoration: none;
-            font-size: 1rem;
-            color: white;
-            transition: background-color 0.3s;
-            cursor: pointer;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
-        .sidebar a:hover,
-        .sidebar label:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        
-        .filter-section {
-            padding: 20px 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .filter-section label {
-            display: block;
-            padding: 0;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.9rem;
-        }
-
-        .filter-section input,
-        .filter-section select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: var(--radius-sm);
-            border: none;
-            font-size: 1rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .filter-section input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        .filter-section button {
-            width: 100%;
-            padding: 12px;
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: var(--radius-sm);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            margin-top: 0.5rem;
-        }
-        
-        .filter-section button:hover {
-            background-color: var(--primary-hover);
-        }
-        
-        .price-range {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        .price-range input {
-            flex: 1;
-        }
-
-        .filter-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .filter-tag {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: var(--transition);
-        }
-        
-        .filter-tag:hover,
-        .filter-tag.active {
-            background-color: var(--primary-color);
-        }
-
-        /* --- Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, var(--card-bg-color), #eef5ff);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-light);
-            margin: 2rem 0;
-            padding: 4rem 2rem;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-section::before {
-            content: "";
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            background-color: rgba(37, 99, 235, 0.1);
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .hero-section::after {
-            content: "";
-            position: absolute;
-            bottom: -100px;
-            left: -100px;
-            width: 300px;
-            height: 300px;
-            background-color: rgba(37, 99, 235, 0.05);
-            border-radius: 50%;
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .hero-section h2 {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            line-height: 1.2;
-        }
-
-        .hero-section p {
-            font-size: 1.2rem;
-            color: var(--light-text-color);
-            margin: 0 auto 2.5rem auto;
-            line-height: 1.8;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-top: 2rem;
-        }
-
-        /* --- Profile Selector --- */
-        .profile-selector {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-            margin-top: 3rem;
-        }
-
-        .profile-card {
-            background-color: var(--card-bg-color);
-            border-radius: var(--radius-md);
-            padding: 2rem 1.5rem;
-            cursor: pointer;
-            transition: var(--transition);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-            border: 1px solid var(--border-color);
-        }
-
-        .profile-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary-color);
-        }
-
-        .profile-card.active {
-            background-color: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-
-        .profile-card.active h3,
-        .profile-card.active .profile-icon {
-            color: white;
-        }
-
-        .profile-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
-            transition: var(--transition);
-        }
-
-        .profile-card h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: var(--secondary-color);
-            transition: var(--transition);
-        }
-
-        /* --- Product Sections --- */
-        .product-section {
-            margin-bottom: 4rem;
-            padding: 2rem 0;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .view-all {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .products-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .product-card {
-            background-color: var(--card-bg-color);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-            cursor: pointer;
-            transition: var(--transition);
-            animation: fadeIn 0.8s ease forwards;
-            opacity: 0;
-            transform: translateY(20px);
-            position: relative;
-            border: 1px solid var(--border-color);
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .product-badges {
-            position: absolute;
-            top: 1rem;
-            left: 1rem;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            z-index: 1;
-        }
-
-        .product-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            transition: var(--transition);
-        }
-
-        .product-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .product-info {
-            padding: 1.5rem;
-        }
-
-        .product-info h4 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .product-price {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .product-old-price {
-            font-size: 0.9rem;
-            color: var(--light-text-color);
-            text-decoration: line-through;
-            margin-right: 0.5rem;
-        }
-
-        .product-specs {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-top: 0.5rem;
-        }
-
-        .product-spec {
-            background-color: var(--background-color);
-            color: var(--light-text-color);
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 500;
-        }
-        
-        .product-actions {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border-color);
-        }
-        
-        .wishlist-btn {
-            background: none;
-            border: none;
-            color: var(--light-text-color);
-            cursor: pointer;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-
-        .wishlist-btn:hover {
-            color: var(--danger-color);
-        }
-
-        .wishlist-btn.active {
-            color: var(--danger-color);
-        }
-
-        /* --- Modal de Detalles del Producto --- */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 2000;
-            padding: 50px 20px;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
-            animation: fadeIn 0.3s ease;
-            overflow-y: auto;
-        }
-
-        .modal-content {
-            background-color: var(--card-bg-color);
-            margin: auto;
-            padding: 40px;
-            border-radius: var(--radius-lg);
-            max-width: 1000px;
-            position: relative;
-            animation: slideUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-        }
-        
-        .modal-close {
-            position: absolute;
-            right: 20px;
-            top: 20px;
-            font-size: 2.5rem;
-            cursor: pointer;
-            color: var(--light-text-color);
-            transition: var(--transition);
-            z-index: 1;
-        }
-
-        .modal-close:hover {
-            color: var(--text-color);
-            transform: rotate(90deg);
-        }
-
-        .modal-image-container {
-            position: relative;
-        }
-
-        .modal-image {
-            width: 100%;
-            max-height: 400px;
-            object-fit: contain;
-            border-radius: var(--radius-md);
-            display: block;
-            margin: 0 auto;
-        }
-
-        .modal-thumbnails {
-            display: flex;
-            gap: 0.75rem;
-            margin-top: 1rem;
-        }
-
-        .modal-thumbnail {
-            width: 60px;
-            height: 60px;
-            object-fit: cover;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: var(--transition);
-        }
-
-        .modal-thumbnail:hover,
-        .modal-thumbnail.active {
-            border-color: var(--primary-color);
-        }
-
-        .modal-details h2 {
-            font-size: 2rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-            line-height: 1.2;
-        }
-
-        .modal-details p {
-            color: var(--light-text-color);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .modal-price {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 1.5rem 0;
-        }
-
-        .modal-old-price {
-            font-size: 1.25rem;
-            color: var(--light-text-color);
-            text-decoration: line-through;
-            margin-right: 0.75rem;
-        }
-
-        .modal-discount {
-            background-color: var(--danger-color);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-
-        .modal-details h3 {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-top: 1.5rem;
-            margin-bottom: 0.8rem;
-            font-weight: 600;
-        }
-
-        .modal-features {
-            list-style: none;
-            padding-left: 0;
-            margin-bottom: 1.5rem;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-        }
-
-        .modal-features li {
-            background-color: var(--background-color);
-            padding: 12px;
-            border-radius: var(--radius-sm);
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .modal-features li::before {
-            content: '✓';
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
-        .profile-recommendation {
-            background-color: rgba(37, 99, 235, 0.1);
-            padding: 1.5rem;
-            border-radius: var(--radius-md);
-            margin: 1.5rem 0;
-        }
-        
-        .profile-recommendation h4 {
-            font-size: 1.1rem;
-            color: var(--secondary-color);
-            margin-bottom: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .profile-recommendation h4 i {
-            color: var(--primary-color);
-        }
-
-        .profile-recommendation p {
-            margin-bottom: 0;
-            color: var(--text-color);
-        }
-
-        /* --- Valoraciones y Comentarios --- */
-        .comments-section {
-            grid-column: 1 / span 2;
-            margin-top: 2rem;
-            border-top: 1px solid var(--border-color);
-            padding-top: 2rem;
-        }
-
-        .comments-section h3 {
-            font-size: 1.75rem;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .rating-overview {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            padding: 1.5rem;
-            background-color: var(--background-color);
-            border-radius: var(--radius-md);
-        }
-
-        .average-rating {
-            text-align: center;
-        }
-
-        .average-rating-value {
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            line-height: 1;
-        }
-
-        .average-rating-stars {
-            color: #f7d921;
-            font-size: 1.5rem;
-            margin: 0.5rem 0;
-        }
-
-        .average-rating-count {
-            color: var(--light-text-color);
-            font-size: 0.9rem;
-        }
-
-        .rating-bars {
-            flex: 1;
-        }
-
-        .rating-bar {
-            display: flex;
-            align-items: center;
-            margin-bottom: 0.75rem;
-        }
-
-        .rating-bar-label {
-            width: 80px;
-            font-size: 0.9rem;
-            color: var(--text-color);
-        }
-
-        .rating-bar-container {
-            flex: 1;
-            height: 8px;
-            background-color: var(--border-color);
-            border-radius: 4px;
-            overflow: hidden;
-            margin: 0 1rem;
-        }
-
-        .rating-bar-fill {
-            height: 100%;
-            background-color: #f7d921;
-        }
-
-        .rating-bar-count {
-            width: 40px;
-            font-size: 0.9rem;
-            color: var(--light-text-color);
-            text-align: right;
-        }
-
-        .comment-item {
-            background: var(--background-color);
-            padding: 1.5rem;
-            border-radius: var(--radius-md);
-            margin-bottom: 1.5rem;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-        }
-
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-        }
-
-        .comment-user {
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
-
-        .comment-date {
-            color: var(--light-text-color);
-            font-size: 0.85rem;
-        }
-
-        .comment-rating {
-            color: #f7d921;
-            margin: 0.5rem 0;
-        }
-
-        .comment-text {
-            line-height: 1.7;
-        }
-        
-        .rating-input {
-            margin-bottom: 1rem;
-        }
-        
-        .rating-input label {
-            font-size: 1.1rem;
-            margin-right: 0.5rem;
-            color: var(--light-text-color);
-        }
-
-        .rating-input .star-rating {
-            display: inline-block;
-        }
-
-        .rating-input .star-rating label {
-            font-size: 1.75rem;
-            color: var(--border-color);
-            cursor: pointer;
-            transition: var(--transition);
-            margin-right: 0.25rem;
-        }
-
-        .rating-input .star-rating label:hover,
-        .rating-input .star-rating input:checked ~ label {
-            color: #f7d921;
-        }
-        
-        .rating-input input {
-            display: none;
-        }
-        
-        .comment-form {
-            background-color: var(--background-color);
-            padding: 2rem;
-            border-radius: var(--radius-md);
-            margin-top: 2rem;
-        }
-        
-        .comment-form h4 {
-            font-size: 1.25rem;
-            color: var(--secondary-color);
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1.25rem;
-        }
-        
-        .comment-form input,
-        .comment-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 10px 0;
-            border-radius: var(--radius-sm);
-            border: 1px solid var(--border-color);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .comment-form input:focus,
-        .comment-form textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-        
-        .comment-form textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .comment-form button {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 14px 28px;
-            border: none;
-            border-radius: var(--radius-sm);
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        
-        .comment-form button:hover {
-            background-color: var(--primary-hover);
-            transform: translateY(-2px);
-        }
-
-        /* --- Opciones de Compra --- */
-        .buy-options {
-            margin-top: 2rem;
-        }
-        
-        .buy-options h3 {
-            font-size: 1.25rem;
-            color: var(--secondary-color);
-            margin-bottom: 1rem;
-        }
-        
-        .buy-options-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-        }
-
-        .buy-option {
-            background-color: var(--background-color);
-            border-radius: var(--radius-sm);
-            padding: 1rem;
-            transition: var(--transition);
-            border: 1px solid var(--border-color);
-        }
-
-        .buy-option:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
-        .buy-option-logo {
-            height: 30px;
-            margin-bottom: 0.75rem;
-            object-fit: contain;
-        }
-
-        .buy-option-price {
-            font-weight: 700;
-            color: var(--primary-color);
-            margin: 0.5rem 0;
-        }
-
-        .buy-option-link {
-            display: inline-block;
-            width: 100%;
-            text-align: center;
-            padding: 0.5rem;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: var(--radius-sm);
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        
-        .buy-option-link:hover {
-            background-color: var(--primary-hover);
-            text-decoration: none;
-        }
-
-        /* --- Comparador de Productos --- */
-        .comparison-section {
-            margin: 4rem 0;
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 2rem;
-            background-color: var(--card-bg-color);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .comparison-table th {
-            background-color: var(--secondary-color);
-            color: white;
-            font-weight: 600;
-        }
-
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .comparison-table tr:hover td {
-            background-color: var(--background-color);
-        }
-
-        .comparison-product {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .comparison-product img {
-            width: 60px;
-            height: 60px;
-            object-fit: contain;
-        }
-
-        .comparison-product-name {
-            font-weight: 600;
-            color: var(--secondary-color);
-        }
-
-        .comparison-feature {
-            font-weight: 500;
-        }
-
-        .comparison-value {
-            color: var(--light-text-color);
-        }
-
-        .comparison-better {
-            color: var(--success-color);
-            font-weight: 600;
-        }
-
-        .comparison-worse {
-            color: var(--danger-color);
-        }
-
-        /* --- Guías y Tutoriales --- */
-        .guides-section {
-            margin: 4rem 0;
-        }
-
-        .guides-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .guide-card {
-            background-color: var(--card-bg-color);
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-            transition: var(--transition);
-        }
-
-        .guide-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .guide-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-
-        .guide-content {
-            padding: 1.5rem;
-        }
-
-        .guide-category {
-            display: inline-block;
-            background-color: var(--primary-color);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 50px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-        }
-
-        .guide-title {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--secondary-color);
-            margin-bottom: 0.75rem;
-            line-height: 1.4;
-        }
-
-        .guide-excerpt {
-            color: var(--light-text-color);
-            margin-bottom: 1rem;
-            line-height: 1.6;
-        }
-        
-        .guide-meta {
-            display: flex;
-            justify-content: space-between;
-            color: var(--light-text-color);
-            font-size: 0.85rem;
-        }
-
-        /* --- Footer --- */
-        footer {
-            background: var(--secondary-color);
-            color: white;
-            padding: 4rem 0 2rem;
-            margin-top: 4rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            left: 0;
-            bottom: -8px;
-            width: 40px;
-            height: 3px;
-            background-color: var(--primary-color);
-        }
-        
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.75rem;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .footer-links a:hover {
-            color: white;
-            padding-left: 5px;
-        }
-
-        .footer-links a i {
-            font-size: 0.8rem;
-        }
-
-        .footer-social {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-        }
-
-        .footer-social a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .footer-social a:hover {
-            background-color: var(--primary-color);
-            transform: translateY(-3px);
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 0.9rem;
-        }
-
-        .footer-bottom a {
-            color: white;
-        }
-
-        /* --- Animaciones --- */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        @keyframes slideUp {
-            from {
-                transform: translateY(100px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* --- Responsive Design --- */
-        @media (max-width: 1200px) {
-            .modal-content {
-                gap: 30px;
-                padding: 30px;
-            }
-            .modal-features {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 992px) {
-            .main-nav {
-                display: none;
-            }
-            .menu-btn {
-                display: block;
-            }
-            .header-right {
-                display: none;
-            }
-            .hero-section h2 {
-                font-size: 2.5rem;
-            }
-            .hero-section p {
-                font-size: 1.1rem;
-            }
-            .profile-selector {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            }
-            .modal-content {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            .modal-image {
-                max-height: 300px;
-            }
-            .footer-content {
-                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-                gap: 2rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 1.5rem;
-            }
-            .hero-section {
-                padding: 3rem 1.5rem;
-            }
-            .hero-section h2 {
-                font-size: 2rem;
-            }
-            .hero-buttons {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .products-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            }
-            .rating-overview {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .rating-bars {
-                width: 100%;
-            }
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 576px) {
-            .hero-section {
-                padding: 2rem 1rem;
-            }
-            .profile-selector {
-                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                gap: 1rem;
-            }
-            .profile-card {
-                padding: 1.5rem 0.5rem;
-            }
-            .profile-icon {
-                font-size: 2rem;
-            }
-            .products-grid {
-                grid-template-columns: 1fr;
-            }
-            .modal-content {
-                padding: 20px;
-            }
-        }
-    </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Estudio Tech | Asesoría en Tecnología para Estudiantes y Profesionales</title>
+
+<!-- Google Fonts corregido -->
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Font Awesome corregido -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+/* --- Estilos Generales y Variables CSS --- */
+:root {
+    --primary-color: #2563eb;
+    --primary-hover: #1d4ed8;
+    --secondary-color: #1e293b;
+    --secondary-hover: #0f172a;
+    --background-color: #f8fafc;
+    --card-bg-color: #ffffff;
+    --text-color: #1e293b;
+    --light-text-color: #64748b;
+    --border-color: #e2e8f0;
+    --shadow-light: 0 4px 15px rgba(0, 0, 0, 0.08);
+    --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.15);
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --danger-color: #ef4444;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: var(--primary-color);
+    transition: var(--transition);
+}
+a:hover {
+    color: var(--primary-hover);
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    text-align: center;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.btn-secondary:hover {
+    background-color: var(--secondary-hover);
+    transform: translateY(-2px);
+}
+
+.btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+}
+.btn-outline:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    color: var(--secondary-color);
+    position: relative;
+    display: inline-block;
+}
+.section-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -10px;
+    width: 60%;
+    height: 4px;
+    background-color: var(--primary-color);
+    border-radius: 2px;
+}
+
+.text-center {
+    text-align: center;
+}
+.text-center .section-title::after {
+    left: 20%;
+}
+
+.badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.badge-new { background-color: var(--success-color); color: white; }
+.badge-popular { background-color: var(--warning-color); color: white; }
+.badge-sale { background-color: var(--danger-color); color: white; }
+
+/* --- Header, Navegación y Sidebar --- */
+header {
+    background: var(--card-bg-color);
+    padding: 1.25rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+.logo-icon {
+    color: var(--primary-color);
+    font-size: 2rem;
+}
+header h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--secondary-color);
+}
+</style>
 </head>
 <body>
-    <header>
-        <div class="header-left">
-            <span class="menu-btn" onclick="openMenu()">☰</span>
-            <div class="logo">
-                <i class="fas fa-laptop-code logo-icon"></i>
-                <h1>Estudio Tech</h1>
-            </div>
-        </div>
-        <nav class="main-nav">
-            <div class="dropdown">
-                <a href="#productos" class="nav-link"><i class="fas fa-box-open"></i> Productos <i class="fas fa-chevron-down"></i></a>
-                <div class="dropdown-content">
-                    <a href="#">Laptops</a>
-                    <a href="#">Smartphones</a>
-                    <a href="#">Accesorios</a>
-                    <a href="#">Componentes</a>
-                </div>
-            </div>
-            <a href="#servicios" class="nav-link"><i class="fas fa-wrench"></i> Servicios</a>
-            <a href="#guias" class="nav-link"><i class="fas fa-book"></i> Guías</a>
-            <a href="#contacto" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a>
-        </nav>
-        <div class="header-right">
-            <div class="search-bar">
-                <input type="text" placeholder="Buscar productos..." />
-                <i class="fas fa-search"></i>
-            </div>
-            <button class="btn btn-primary"><i class="fas fa-user-circle"></i> Mi Cuenta</button>
-        </div>
-    </header>
 
-    <div class="container">
-        <section class="hero-section">
-            <div class="hero-content">
-                <h2>Asesoría en Tecnología para Estudiantes y Profesionales</h2>
-                <p>Encuentra los mejores productos, guías y servicios para potenciar tu vida tecnológica.</p>
-                <div class="hero-buttons">
-                    <a href="#productos" class="btn btn-primary">Ver Productos</a>
-                    <a href="#servicios" class="btn btn-outline">Nuestros Servicios</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="section-title text-center">
-            <h2>Selecciona tu Perfil</h2>
-        </section>
-        <section class="profile-selector">
-            <div class="profile-card">
-                <i class="fas fa-user-graduate profile-icon"></i>
-                <h3>Estudiante</h3>
-                <p>Equipos ideales para el estudio.</p>
-            </div>
-            <div class="profile-card active">
-                <i class="fas fa-briefcase profile-icon"></i>
-                <h3>Profesional</h3>
-                <p>Herramientas de alto rendimiento.</p>
-            </div>
-            <div class="profile-card">
-                <i class="fas fa-laptop-code profile-icon"></i>
-                <h3>Desarrollador</h3>
-                <p>Hardware para programadores.</p>
-            </div>
-            <div class="profile-card">
-                <i class="fas fa-gamepad profile-icon"></i>
-                <h3>Gamer</h3>
-                <p>El mejor rendimiento en juegos.</p>
-            </div>
-        </section>
-        <section class="product-section">
-            <div class="section-header">
-                <h2 class="section-title">Productos Destacados</h2>
-                <a href="#productos" class="view-all">
-                    Ver Todos
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="products-grid">
-                <div class="product-card">
-                    <div class="product-badges">
-                        <span class="badge badge-new">Nuevo</span>
-                    </div>
-                    <img src="https://via.placeholder.com/280x220" alt="Producto 1" />
-                    <div class="product-info">
-                        <h4>Laptop Gamer Ultra</h4>
-                        <p class="product-price">$1500</p>
-                        <div class="product-specs">
-                            <span class="product-spec">Intel i7</span>
-                            <span class="product-spec">16GB RAM</span>
-                            <span class="product-spec">RTX 3070</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                            <button class="btn btn-primary btn-small">Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-badges">
-                        <span class="badge badge-sale">Oferta</span>
-                        <span class="badge badge-popular">Popular</span>
-                    </div>
-                    <img src="https://via.placeholder.com/280x220" alt="Producto 2" />
-                    <div class="product-info">
-                        <h4>Monitor 4K Profesional</h4>
-                        <div class="product-price">
-                            <span class="product-old-price">$700</span>
-                            $599
-                        </div>
-                        <div class="product-specs">
-                            <span class="product-spec">27 pulgadas</span>
-                            <span class="product-spec">4K UHD</span>
-                            <span class="product-spec">HDR10</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="wishlist-btn active"><i class="fas fa-heart"></i></button>
-                            <button class="btn btn-primary btn-small">Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <div class="product-badges">
-                        <span class="badge badge-popular">Popular</span>
-                    </div>
-                    <img src="https://via.placeholder.com/280x220" alt="Producto 3" />
-                    <div class="product-info">
-                        <h4>Teclado Mecánico RGB</h4>
-                        <p class="product-price">$120</p>
-                        <div class="product-specs">
-                            <span class="product-spec">Switches Gateron</span>
-                            <span class="product-spec">Retroiluminación RGB</span>
-                        </div>
-                        <div class="product-actions">
-                            <button class="wishlist-btn"><i class="far fa-heart"></i></button>
-                            <button class="btn btn-primary btn-small">Añadir al carrito</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section class="guides-section">
-            <div class="section-header">
-                <h2 class="section-title">Guías y Tutoriales</h2>
-                <a href="#guias" class="view-all">
-                    Ver Todas
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
-            <div class="guides-grid">
-                <div class="guide-card">
-                    <img src="https://via.placeholder.com/300x180" alt="Guía 1" class="guide-image" />
-                    <div class="guide-content">
-                        <span class="guide-category">Laptops</span>
-                        <h3 class="guide-title">Cómo elegir la laptop ideal para programar</h3>
-                        <p class="guide-excerpt">Una guía completa con las especificaciones clave a considerar antes de comprar.</p>
-                        <div class="guide-meta">
-                            <span><i class="fas fa-calendar-alt"></i> 15 de Oct, 2023</span>
-                            <span><i class="fas fa-clock"></i> 5 min de lectura</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="guide-card">
-                    <img src="https://via.placeholder.com/300x180" alt="Guía 2" class="guide-image" />
-                    <div class="guide-content">
-                        <span class="guide-category">Componentes</span>
-                        <h3 class="guide-title">Arma tu PC por menos de $1000</h3>
-                        <p class="guide-excerpt">Componentes recomendados para un PC de gaming con buen rendimiento y presupuesto ajustado.</p>
-                        <div class="guide-meta">
-                            <span><i class="fas fa-calendar-alt"></i> 10 de Oct, 2023</span>
-                            <span><i class="fas fa-clock"></i> 10 min de lectura</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="guide-card">
-                    <img src="https://via.placeholder.com/300x180" alt="Guía 3" class="guide-image" />
-                    <div class="guide-content">
-                        <span class="guide-category">Software</span>
-                        <h3 class="guide-title">10 herramientas esenciales para la productividad</h3>
-                        <p class="guide-excerpt">Optimiza tu flujo de trabajo con estas herramientas de software.</p>
-                        <div class="guide-meta">
-                            <span><i class="fas fa-calendar-alt"></i> 01 de Oct, 2023</span>
-                            <span><i class="fas fa-clock"></i> 8 min de lectura</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<header>
+    <div class="header-left">
+        <a href="javascript:void(0)" class="menu-btn" onclick="openMenu()">☰</a>
+        <div class="logo">
+            <i class="fas fa-laptop-code logo-icon"></i>
+            <h1>Estudio Tech</h1>
         </div>
+    </div>
+    <nav class="main-nav">
+        <div class="dropdown">
+            <a href="#productos" class="nav-link"><i class="fas fa-box-open"></i> Productos <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="#portatiles"><i class="fas fa-laptop"></i> Portátiles</a>
+                <a href="#moviles"><i class="fas fa-mobile-alt"></i> Móviles</a>
+                <a href="#tablets"><i class="fas fa-tablet-alt"></i> Tablets</a>
+                <a href="#accesorios"><i class="fas fa-keyboard"></i> Accesorios</a>
+                <a href="#software"><i class="fas fa-code"></i> Software</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <a href="#guias" class="nav-link"><i class="fas fa-book"></i> Guías <i class="fas fa-chevron-down"></i></a>
+            <div class="dropdown-content">
+                <a href="#guias-estudio"><i class="fas fa-graduation-cap"></i> Para Estudiar</a>
+                <a href="#guias-trabajo"><i class="fas fa-briefcase"></i> Para Trabajar</a>
+                <a href="#guias-creatividad"><i class="fas fa-paint-brush"></i> Para Crear</a>
+                <a href="#guias-programacion"><i class="fas fa-code"></i> Para Programar</a>
+            </div>
+        </div>
+        <a href="#comparador" class="nav-link"><i class="fas fa-balance-scale"></i> Comparador</a>
+        <a href="#blog" class="nav-link"><i class="fas fa-newspaper"></i> Blog</a>
+        <a href="#contacto" class="nav-link"><i class="fas fa-envelope"></i> Contacto</a>
+    </nav>
+    <div class="header-right">
+        <div class="search-bar">
+            <i class="fas fa-search"></i>
+            <input type="text" placeholder="Buscar productos..." id="headerSearch" />
+        </div>
+        <a href="#cuenta" class="btn btn-outline"><i class="fas fa-user"></i> Mi Cuenta</a>
+    </div>
+</header>
+
+<div id="sidebar" class="sidebar">
+    <a href="javascript:void(0)" class="close-btn" onclick="closeMenu()">×</a>
+    <h3><i class="fas fa-filter"></i> Filtros y Categorías</h3>
+    <a href="javascript:void(0)" onclick="setCategory('all')"><i class="fas fa-boxes"></i> Todos los productos</a>
+    <a href="javascript:void(0)" onclick="setCategory('portatiles')"><i class="fas fa-laptop"></i> Portátiles</a>
+    <a href="javascript:void(0)" onclick="setCategory('moviles')"><i class="fas fa-mobile-alt"></i> Móviles</a>
+    <a href="javascript:void(0)" onclick="setCategory('tablets')"><i class="fas fa-tablet-alt"></i> Tablets</a>
+    <a href="javascript:void(0)" onclick="setCategory('accesorios')"><i class="fas fa-keyboard"></i> Accesorios</a>
+    <a href="javascript:void(0)" onclick="setCategory('software')"><i class="fas fa-code"></i> Software</a>
     
-    <footer>
-        <div class="container footer-content">
+    <div class="filter-section">
+        <h3><i class="fas fa-sliders-h"></i> Filtrar por Precio (€)</h3>
+        <div class="price-range">
+            <div>
+                <label for="minPrice">Mínimo:</label>
+                <input type="number" id="minPrice" placeholder="0" min="0" />
+            </div>
+            <div>
+                <label for="maxPrice">Máximo:</label>
+                <input type="number" id="maxPrice" placeholder="9999" min="0" />
+            </div>
+        </div>
+        <button onclick="applyFilters()"><i class="fas fa-check"></i> Aplicar Filtros</button>
+    </div>
+
+    <div class="filter-section">
+        <h3><i class="fas fa-search"></i> Buscar</h3>
+        <input type="text" id="searchText" placeholder="Buscar por nombre..." />
+        <button onclick="applyFilters()"><i class="fas fa-search"></i> Buscar</button>
+    </div>
+
+    <div class="filter-section">
+        <h3><i class="fas fa-tags"></i> Etiquetas populares</h3>
+        <div class="filter-tags">
+            <div class="filter-tag" onclick="filterByTag('oferta')">Ofertas</div>
+            <div class="filter-tag" onclick="filterByTag('nuevo')">Nuevos</div>
+            <div class="filter-tag" onclick="filterByTag('recomendado')">Recomendados</div>
+            <div class="filter-tag" onclick="filterByTag('gaming')">Gaming</div>
+            <div class="filter-tag" onclick="filterByTag('profesional')">Profesional</div>
+            <div class="filter-tag" onclick="filterByTag('estudiante')">Estudiante</div>
+        </div>
+    </div>
+</div>
+
+<main class="container">
+    <section class="hero-section">
+        <div class="hero-content">
+            <h2>La tecnología adecuada para cada estudiante y profesional</h2>
+            <p>Descubre las mejores herramientas tecnológicas adaptadas a tu área de estudio o trabajo. Nuestros expertos han analizado cientos de productos para ofrecerte recomendaciones personalizadas.</p>
+            <div class="hero-buttons">
+                <a href="#productos" class="btn btn-primary"><i class="fas fa-box-open"></i> Explorar Productos</a>
+                <a href="#guias" class="btn btn-outline"><i class="fas fa-book"></i> Ver Guías</a>
+            </div>
+        </div>
+    </section>
+
+      <!-- Sección de perfiles -->
+    <section class="product-section">
+        <h2 class="section-title text-center">Selecciona tu perfil</h2>
+        <p class="text-center" style="max-width: 800px; margin: 0 auto 2rem;">
+            Nuestras recomendaciones se adaptan a tus necesidades específicas. 
+            Elige tu perfil principal para ver los productos más adecuados para ti.
+        </p>
+        <div class="profile-selector">
+            <div class="profile-card" onclick="filterByProfile('ingenieria')">
+                <i class="fas fa-cogs profile-icon"></i>
+                <h3>Ingeniería</h3>
+            </div>
+            <div class="profile-card" onclick="filterByProfile('disenografico')">
+                <i class="fas fa-paint-brush profile-icon"></i>
+                <h3>Diseño Gráfico</h3>
+            </div>
+            <div class="profile-card" onclick="filterByProfile('medicina')">
+                <i class="fas fa-heartbeat profile-icon"></i>
+                <h3>Medicina</h3>
+            </div>
+            <div class="profile-card" onclick="filterByProfile('programacion')">
+                <i class="fas fa-code profile-icon"></i>
+                <h3>Programación</h3>
+            </div>
+            <div class="profile-card" onclick="filterByProfile('marketing')">
+                <i class="fas fa-bullhorn profile-icon"></i>
+                <h3>Marketing Digital</h3>
+            </div>
+            <div class="profile-card" onclick="filterByProfile('audiovisual')">
+                <i class="fas fa-film profile-icon"></i>
+                <h3>Audiovisual</h3>
+            </div>
+            <div class="profile-card" onclick="filterByProfile('arquitectura')">
+                <i class="fas fa-ruler-combined profile-icon"></i>
+                <h3>Arquitectura</h3>
+            </div>
+            <div class="profile-card" onclick="filterByProfile('musica')">
+                <i class="fas fa-music profile-icon"></i>
+                <h3>Música</h3>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aquí seguirían las secciones de productos destacados, comparador y guías -->
+</main>
+
+<footer>
+    <div class="container">
+        <div class="footer-content">
             <div class="footer-column">
                 <h3>Estudio Tech</h3>
-                <p>Tu asesoría tecnológica de confianza.</p>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">
+                    Tu guía definitiva para elegir la mejor tecnología según tus necesidades académicas y profesionales.
+                </p>
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
                     <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
                     <a href="#"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
-            <div class="footer-column">
-                <h3>Navegación</h3>
-                <ul class="footer-links">
-                    <li><a href="#productos"><i class="fas fa-angle-right"></i> Productos</a></li>
-                    <li><a href="#servicios"><i class="fas fa-angle-right"></i> Servicios</a></li>
-                    <li><a href="#guias"><i class="fas fa-angle-right"></i> Guías</a></li>
-                    <li><a href="#contacto"><i class="fas fa-angle-right"></i> Contacto</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Contacto</h3>
-                <ul class="footer-links">
-                    <li><a href="#"><i class="fas fa-map-marker-alt"></i> 123 Calle Falsa, S/N</a></li>
-                    <li><a href="#"><i class="fas fa-envelope"></i> info@estudiotech.com</a></li>
-                    <li><a href="#"><i class="fas fa-phone"></i> +34 123 456 789</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h3>Boletín</h3>
-                <p>Suscríbete para recibir las últimas novedades y ofertas.</p>
-                <form action="#" class="newsletter-form">
-                    <input type="email" placeholder="Tu email" />
-                    <button type="submit" class="btn btn-primary">Suscribirme</button>
-                </form>
-            </div>
+            <!-- Más columnas del footer -->
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2023 Estudio Tech. Todos los derechos reservados.</p>
+            <p>&copy; 2025 Estudio Tech. Todos los derechos reservados. | 
+                <a href="#">Política de privacidad</a> | 
+                <a href="#">Términos de servicio</a> | 
+                <a href="#">Aviso legal</a>
+            </p>
         </div>
-    </footer>
+    </div>
+</footer>
+
+<!-- Script con la base de datos y funciones -->
+<script>
+const products = [
+    {
+        id: 1,
+        name: "MacBook Pro 16&quot; M3 Max",
+        price: 3499,
+        oldPrice: 3799,
+        category: "portatiles",
+        images: [
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp16-spacegray-select-202310?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697230830209",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp16-spacegray-select-202310_GEO_ES?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697230831093",
+            "https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mbp16-spacegray-select-202310_SP?wid=904&hei=840&fmt=jpeg&qlt=90&.v=1697230831093"
+        ],
+        description: "El portátil más potente de Apple con el chip M3 Max. Ideal para profesionales que necesitan un rendimiento excepcional en tareas intensivas.",
+        features: [
+            "Chip Apple M3 Max (16 núcleos CPU, 40 núcleos GPU)",
+            "64 GB RAM unificada",
+            "1 TB SSD de almacenamiento",
+            "Pantalla Liquid Retina XDR de 16.2 pulgadas",
+            "Hasta 22 horas de batería",
+            "6 altavoces con sonido espacial",
+            "Cámara FaceTime HD de 1080p"
+        ],
+        tags: ["nuevo", "profesional", "recomendado"],
+        recommendations: {
+            ingenieria: "El mejor portátil para ingenieros que trabajan con software de modelado 3D, simulaciones complejas y análisis de datos.",
+            disenografico: "Ideal para diseñadores que trabajan con archivos pesados en Photoshop, Illustrator y After Effects.",
+            programacion: "Perfecto para desarrolladores que necesitan compilar código rápidamente, ejecutar máquinas virtuales y contenedores Docker.",
+            audiovisual: "La mejor opción para edición de vídeo 8K, efectos visuales y animación 3D.",
+            arquitectura: "Capaz de manejar proyectos complejos en AutoCAD, Revit y SketchUp con fluidez."
+        },
+        buyLinks: [
+            {name: "Apple Store", url: "https://www.apple.com/es/shop/buy-mac/macbook-pro/16", logo: "https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg", price: 3499},
+            {name: "Amazon", url: "https://www.amazon.es/dp/B0CMZJ1S3H", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg", price: 3399}
+        ]
+    }
+    // ... Resto de productos
+];
+
+function openMenu(){ document.getElementById("sidebar").style.width = "300px"; }
+function closeMenu(){ document.getElementById("sidebar").style.width = "0"; }
+function setCategory(cat){ console.log("Filtrar categoría:", cat); }
+function applyFilters(){ console.log("Aplicando filtros..."); }
+function filterByTag(tag){ console.log("Filtrar por etiqueta:", tag); }
+function filterByProfile(profile){ console.log("Filtrar por perfil:", profile); }
+</script>
+
 </body>
 </html>
