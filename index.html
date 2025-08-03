@@ -1,580 +1,349 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Estudio Tech - Recomendaciones Tecnología</title>
-  <style>
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    body {
-      background: #f9f9f9;
-      color: #222;
-      line-height: 1.5;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-    }
-    h1, h2, h3 {
-      color: #004aad;
-      margin-bottom: 0.5rem;
-    }
-    main {
-      max-width: 1200px;
-      width: 100%;
-    }
-    section {
-      margin-bottom: 3rem;
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.08);
-    }
-    .productos-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
-      gap: 1.5rem;
-    }
-    .producto {
-      background: #f0f4ff;
-      border-radius: 8px;
-      padding: 15px;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      position: relative;
-    }
-    .producto img {
-      width: 100%;
-      height: auto;
-      border-radius: 6px;
-      margin-bottom: 0.7rem;
-    }
-    .producto h3 {
-      margin-bottom: 0.3rem;
-      font-size: 1.2rem;
-    }
-    .precio {
-      font-weight: bold;
-      color: #0070f3;
-      margin-bottom: 0.5rem;
-    }
-    .descripcion,
-    .recomendacion {
-      font-size: 0.9rem;
-      margin-bottom: 0.4rem;
-    }
-    .btn-small {
-      display: inline-block;
-      background-color: #0070f3;
-      color: white;
-      padding: 7px 15px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: 600;
-      margin-bottom: 0.8rem;
-      transition: background-color 0.3s ease;
-    }
-    .btn-small:hover,
-    .btn-small:focus {
-      background-color: #005bb5;
-      outline: none;
-    }
-    input.comparar {
-      position: absolute;
-      top: 15px;
-      right: 15px;
-      width: 20px;
-      height: 20px;
-      cursor: pointer;
-    }
-    /* Comentarios */
-    .comentarios-container {
-      max-height: 150px;
-      overflow-y: auto;
-      background: #e7ebff;
-      border-radius: 6px;
-      padding: 10px;
-      margin-bottom: 0.5rem;
-      font-size: 0.85rem;
-    }
-    .comentario {
-      margin-bottom: 0.7rem;
-    }
-    .comentario strong {
-      color: #004aad;
-    }
-    .estrellas {
-      color: #ffb400;
-      margin-left: 5px;
-      font-size: 1rem;
-    }
-    /* Form comentarios */
-    form.form-comentarios {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-      font-size: 0.85rem;
-    }
-    form label {
-      font-weight: 600;
-    }
-    form input[type="text"],
-    form textarea,
-    form select {
-      padding: 5px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      resize: vertical;
-      font-size: 0.85rem;
-    }
-    form button {
-      align-self: flex-start;
-      background-color: #004aad;
-      color: white;
-      border: none;
-      padding: 6px 12px;
-      border-radius: 4px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: background-color 0.3s ease;
-    }
-    form button:hover,
-    form button:focus {
-      background-color: #002f6c;
-      outline: none;
-    }
-    /* Comparar */
-    #comparacion {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 0 12px rgba(0,0,0,0.1);
-      margin-bottom: 3rem;
-    }
-    #productos-seleccionados {
-      margin-bottom: 1rem;
-      font-weight: 600;
-      color: #0070f3;
-    }
-    #boton-comparar {
-      background-color: #0070f3;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      font-size: 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-weight: 700;
-      transition: background-color 0.3s ease;
-      margin-bottom: 1rem;
-    }
-    #boton-comparar:disabled {
-      background-color: #a0bfff;
-      cursor: not-allowed;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 8px 12px;
-      text-align: left;
-      vertical-align: top;
-    }
-    th {
-      background-color: #0070f3;
-      color: white;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Estudio Tech</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f7fa;
+    color: #333;
+  }
+  header {
+    background: linear-gradient(90deg,#004aad,#0070f3);
+    color: white;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .menu-btn {
+    font-size: 1.8rem;
+    cursor: pointer;
+  }
+  h1 { font-size: 1.5rem; }
+  /* Sidebar */
+  .sidebar {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    top: 0; left: 0;
+    background-color: #003080;
+    overflow-x: hidden;
+    transition: 0.3s;
+    padding-top: 60px;
+    z-index: 1000;
+  }
+  .sidebar a, .sidebar label {
+    padding: 10px 20px;
+    display: block;
+    text-decoration: none;
+    font-size: 1rem;
+    color: white;
+    transition: 0.2s;
+    cursor: pointer;
+  }
+  .sidebar a:hover, .sidebar label:hover {
+    background-color: #004aad;
+  }
+  .close-btn {
+    position: absolute;
+    top: 10px; right: 20px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: white;
+  }
+  /* Filtros */
+  .filter-section {
+    padding: 10px 20px;
+    color: white;
+  }
+  .filter-section input {
+    width: 90%;
+    padding: 5px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border: none;
+  }
+  /* Grid productos */
+  main { padding: 1rem; }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .product-card {
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  .product-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .product-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  }
+  .product-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+  }
+  .product-card .info {
+    padding: 0.7rem;
+  }
+  .product-card .info h4 {
+    font-size: 1rem;
+    margin-bottom: 0.3rem;
+  }
+  .product-card .info p {
+    color: #0070f3;
+    font-weight: bold;
+  }
+  /* Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    padding-top: 50px;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.6);
+    animation: fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from {opacity:0} to {opacity:1} }
+  .modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 600px;
+    position: relative;
+    animation: slideUp 0.3s ease;
+  }
+  @keyframes slideUp { from {transform: translateY(50px);} to {transform: translateY(0);} }
+  .modal-close {
+    position: absolute;
+    right: 15px; top: 10px;
+    font-size: 1.5rem;
+    cursor: pointer;
+  }
+  .comments-section { margin-top: 1rem; }
+  .comment {
+    background: #f0f4ff;
+    padding: 8px;
+    border-radius: 4px;
+    margin-bottom: 5px;
+  }
+  .buy-btn {
+    display: inline-block;
+    padding: 10px 15px;
+    background-color: #0070f3;
+    color: white;
+    border-radius: 4px;
+    text-decoration: none;
+    margin-top: 10px;
+  }
+  .buy-btn:hover {
+    background-color: #0057b8;
+  }
+  form input, form textarea {
+    width: 100%;
+    padding: 6px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+  }
+  form button {
+    background-color: #004aad;
+    color: white;
+    padding: 7px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  form button:hover { background-color: #002f6c; }
+</style>
 </head>
 <body>
-  <h1>Estudio Tech - Recomendaciones Tecnología para Estudiantes</h1>
-  <main>
+<header>
+  <span class="menu-btn" onclick="openMenu()">☰</span>
+  <h1>Estudio Tech</h1>
+</header>
 
-    <section id="comparacion" aria-label="Comparador de productos">
-      <h2>Comparar productos seleccionados</h2>
-      <div id="productos-seleccionados"><em>No hay productos seleccionados</em></div>
-      <button id="boton-comparar" disabled>Comparar</button>
-      <div id="resultado-comparacion" tabindex="0" aria-live="polite"></div>
-    </section>
+<div id="sidebar" class="sidebar">
+  <span class="close-btn" onclick="closeMenu()">×</span>
+  <a onclick="setCategory('all')">Todos</a>
+  <a onclick="setCategory('portatiles')">Portátiles</a>
+  <a onclick="setCategory('moviles')">Móviles</a>
+  <a onclick="setCategory('auriculares')">Auriculares</a>
+  <a onclick="setCategory('accesorios')">Accesorios</a>
 
-    <!-- Auriculares -->
-    <section id="auriculares" aria-labelledby="titulo-auriculares">
-      <h2 id="titulo-auriculares">Auriculares Recomendados</h2>
-      <div class="productos-grid">
-        <article class="producto" data-id="auricular-1">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar auriculares Sony WH-1000XM4 para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=Sony+WH-1000XM4" alt="Auriculares Sony WH-1000XM4" />
-          <h3>Sony WH-1000XM4</h3>
-          <p class="precio">279 €</p>
-          <p class="descripcion">Cancelación activa de ruido, 30 horas de batería, sonido de alta calidad.</p>
-          <p class="recomendacion">Perfectos para estudiar y concentrarse en entornos ruidosos.</p>
-          <a href="https://www.elcorteingles.es/electronica/A39103071-auriculares-sin-cable-sony-wh-1000xm4-negro" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para Sony WH-1000XM4">
-            <label for="nombre-auricular-1">Nombre:</label>
-            <input type="text" id="nombre-auricular-1" name="nombre" required />
-            <label for="comentario-auricular-1">Comentario:</label>
-            <textarea id="comentario-auricular-1" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-auricular-1">Valoración:</label>
-            <select id="valoracion-auricular-1" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
+  <div class="filter-section">
+    <label>Precio mín:</label>
+    <input type="number" id="minPrice" placeholder="€" />
+    <label>Precio máx:</label>
+    <input type="number" id="maxPrice" placeholder="€" />
+  </div>
 
-        <article class="producto" data-id="auricular-2">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar auriculares Apple AirPods Pro para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=AirPods+Pro" alt="Auriculares Apple AirPods Pro" />
-          <h3>Apple AirPods Pro</h3>
-          <p class="precio">249 €</p>
-          <p class="descripcion">Cancelación activa de ruido, diseño compacto, integración con dispositivos Apple.</p>
-          <p class="recomendacion">Ideal para estudiantes que usan productos Apple y buscan comodidad.</p>
-          <a href="https://www.pccomponentes.com/apple-airpods-pro" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para Apple AirPods Pro">
-            <label for="nombre-auricular-2">Nombre:</label>
-            <input type="text" id="nombre-auricular-2" name="nombre" required />
-            <label for="comentario-auricular-2">Comentario:</label>
-            <textarea id="comentario-auricular-2" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-auricular-2">Valoración:</label>
-            <select id="valoracion-auricular-2" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
+  <div class="filter-section">
+    <label>Buscar producto:</label>
+    <input type="text" id="searchText" placeholder="Escribe un nombre" />
+  </div>
+</div>
 
-        <!-- Añade más auriculares aquí -->
+<main>
+  <div class="products-grid" id="productsGrid"></div>
+</main>
 
+<!-- Modal -->
+<div id="productModal" class="modal">
+  <div class="modal-content">
+    <span class="modal-close" onclick="closeModal()">×</span>
+    <h2 id="modalTitle"></h2>
+    <img id="modalImage" src="" alt="" style="width:100%;max-height:250px;object-fit:cover;" />
+    <p id="modalDescription"></p>
+    <a id="modalLink" href="#" target="_blank" class="buy-btn">Comprar</a>
+    <div class="comments-section">
+      <h3>Comentarios</h3>
+      <div id="commentsList"></div>
+      <form id="commentForm">
+        <input type="text" id="commentName" placeholder="Tu nombre" required />
+        <textarea id="commentText" placeholder="Tu comentario" required></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<script>
+const products = [
+  {id:1,name:"Lenovo IdeaPad 3",price:599,category:"portatiles",image:"https://img.pccomponentes.com/articles/1006/10064372/1006-lenovo-ideapad-3-15itl6-intel-core-i5-1135g7-8gb-512gb-ssd-156.jpg",description:"Intel i5, 8GB RAM, 512GB SSD. Ideal para estudiantes que buscan equilibrio.",link:"https://www.pccomponentes.com/lenovo-ideapad-3"},
+  {id:2,name:"MacBook Air M1",price:1099,category:"portatiles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mb-air-spacegray-select-202011?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1603332211000",description:"Chip M1, 8GB RAM, 256GB SSD. Rendimiento y autonomía excepcionales.",link:"https://www.apple.com/es/macbook-air-m1/"},
+  {id:3,name:"iPhone 14",price:999,category:"moviles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-blue-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1663703842785",description:"Pantalla 6.1\", A15 Bionic, cámara avanzada. Ideal para ecosistema Apple.",link:"https://www.apple.com/es/iphone-14/"},
+  {id:4,name:"Samsung Galaxy S22",price:849,category:"moviles",image:"https://images.samsung.com/is/image/samsung/p6pim/es/2202/gallery/es-galaxy-s22-s901-sm-s901bzkdeub-530682271?$650_519_PNG$",description:"Pantalla 6.1\", Exynos 2200, cámara triple. Android potente y versátil.",link:"https://www.samsung.com/es/smartphones/galaxy-s22/"},
+  {id:5,name:"Sony WH-1000XM4",price:279,category:"auriculares",image:"https://www.sony.es/image/93bbce75e54b89c8f7e60d8cb5c4c881?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",description:"Cancelación activa de ruido y 30 horas de batería. Perfectos para concentración.",link:"https://www.sony.es/electronics/auriculares-diademas/wh-1000xm4"},
+  {id:6,name:"Apple AirPods Pro",price:249,category:"auriculares",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-pro-2nd-gen-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1660803965869",description:"Cancelación activa, modo transparencia, integración perfecta con Apple.",link:"https://www.apple.com/es/airpods-pro/"},
+  {id:7,name:"Logitech MX Master 3",price:99,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3/gallery/mx-master-3-top-view-graphite.png?v=1",description:"Ratón ergonómico y preciso. Perfecto para largas jornadas de estudio o trabajo.",link:"https://www.logitech.com/es-es/products/mice/mx-master-3.html"},
+  {id:8,name:"Teclado Logitech K380",price:39,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/keyboards/k380/gallery/k380-keyboard-top-view-rose-gallery.png?v=1",description:"Teclado Bluetooth compacto multi-dispositivo.",link:"https://www.logitech.com/es-es/products/keyboards/k380.html"}
+];
+
+const commentsData = {};
+let currentCategory = "all";
+let currentMinPrice = 0;
+let currentMaxPrice = Infinity;
+let currentSearchText = "";
+
+// Menú
+function openMenu() {
+  document.getElementById("sidebar").style.width = "260px";
+}
+function closeMenu() {
+  document.getElementById("sidebar").style.width = "0";
+}
+
+// Set categoría
+function setCategory(cat) {
+  currentCategory = cat;
+  applyFilters();
+  closeMenu();
+}
+
+// Aplicar filtros
+function applyFilters() {
+  currentMinPrice = parseFloat(document.getElementById("minPrice").value) || 0;
+  currentMaxPrice = parseFloat(document.getElementById("maxPrice").value) || Infinity;
+  currentSearchText = document.getElementById("searchText").value.toLowerCase().trim();
+
+  const grid = document.getElementById("productsGrid");
+  grid.innerHTML = "";
+
+  const filtered = products.filter(p => {
+    const inCategory = (currentCategory === "all" || p.category === currentCategory);
+    const inPrice = (p.price >= currentMinPrice && p.price <= currentMaxPrice);
+    const inSearch = p.name.toLowerCase().includes(currentSearchText);
+    return inCategory && inPrice && inSearch;
+  });
+
+  filtered.forEach((prod, index) => {
+    const card = document.createElement("div");
+    card.classList.add("product-card");
+    setTimeout(() => card.classList.add("visible"), index * 100);
+    card.innerHTML = `
+      <img src="${prod.image}" alt="${prod.name}" />
+      <div class="info">
+        <h4>${prod.name}</h4>
+        <p>${prod.price} €</p>
       </div>
-    </section>
+    `;
+    card.addEventListener("click", () => openProduct(prod.id));
+    grid.appendChild(card);
+  });
+}
 
-    <!-- Tablets -->
-    <section id="tablets" aria-labelledby="titulo-tablets">
-      <h2 id="titulo-tablets">Tablets Recomendadas</h2>
-      <div class="productos-grid">
-        <article class="producto" data-id="tablet-1">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar tablet iPad Air para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=iPad+Air" alt="Tablet iPad Air" />
-          <h3>Apple iPad Air (2022)</h3>
-          <p class="precio">699 €</p>
-          <p class="descripcion">Pantalla Liquid Retina 10.9", chip M1, compatible con Apple Pencil.</p>
-          <p class="recomendacion">Perfecta para tomar apuntes, diseño y multitarea en estudios creativos.</p>
-          <a href="https://www.elcorteingles.es/electronica/A41602291-tablet-apple-ipad-air-2022-10-9" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para Apple iPad Air">
-            <label for="nombre-tablet-1">Nombre:</label>
-            <input type="text" id="nombre-tablet-1" name="nombre" required />
-            <label for="comentario-tablet-1">Comentario:</label>
-            <textarea id="comentario-tablet-1" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-tablet-1">Valoración:</label>
-            <select id="valoracion-tablet-1" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
+// Búsqueda en tiempo real
+document.getElementById("searchText").addEventListener("input", applyFilters);
+document.getElementById("minPrice").addEventListener("input", applyFilters);
+document.getElementById("maxPrice").addEventListener("input", applyFilters);
 
-        <article class="producto" data-id="tablet-2">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar tablet Samsung Galaxy Tab S7 para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=Samsung+Galaxy+Tab+S7" alt="Tablet Samsung Galaxy Tab S7" />
-          <h3>Samsung Galaxy Tab S7</h3>
-          <p class="precio">649 €</p>
-          <p class="descripcion">Pantalla 11", Snapdragon 865+, S Pen incluido, Android.</p>
-          <p class="recomendacion">Ideal para estudiantes Android que buscan rendimiento y versatilidad.</p>
-          <a href="https://www.pccomponentes.com/samsung-galaxy-tab-s7" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para Samsung Galaxy Tab S7">
-            <label for="nombre-tablet-2">Nombre:</label>
-            <input type="text" id="nombre-tablet-2" name="nombre" required />
-            <label for="comentario-tablet-2">Comentario:</label>
-            <textarea id="comentario-tablet-2" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-tablet-2">Valoración:</label>
-            <select id="valoracion-tablet-2" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
+// Modal producto
+function openProduct(id) {
+  const prod = products.find(p => p.id === id);
+  document.getElementById("modalTitle").textContent = prod.name;
+  document.getElementById("modalImage").src = prod.image;
+  document.getElementById("modalDescription").textContent = prod.description;
+  document.getElementById("modalLink").href = prod.link;
 
-        <!-- Más tablets aquí -->
-      </div>
-    </section>
-
-    <!-- Móviles -->
-    <section id="moviles" aria-labelledby="titulo-moviles">
-      <h2 id="titulo-moviles">Móviles Recomendados</h2>
-      <div class="productos-grid">
-        <article class="producto" data-id="movil-1">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar móvil iPhone 14 para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=iPhone+14" alt="Móvil iPhone 14" />
-          <h3>Apple iPhone 14</h3>
-          <p class="precio">999 €</p>
-          <p class="descripcion">Pantalla 6.1", A15 Bionic, cámara dual avanzada, iOS.</p>
-          <p class="recomendacion">Ideal para estudiantes que valoran un ecosistema integrado y fotografía.</p>
-          <a href="https://www.elcorteingles.es/electronica/A44755142-iphone-14-128gb-negro" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para iPhone 14">
-            <label for="nombre-movil-1">Nombre:</label>
-            <input type="text" id="nombre-movil-1" name="nombre" required />
-            <label for="comentario-movil-1">Comentario:</label>
-            <textarea id="comentario-movil-1" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-movil-1">Valoración:</label>
-            <select id="valoracion-movil-1" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
-
-        <article class="producto" data-id="movil-2">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar móvil Samsung Galaxy S22 para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=Samsung+Galaxy+S22" alt="Móvil Samsung Galaxy S22" />
-          <h3>Samsung Galaxy S22</h3>
-          <p class="precio">849 €</p>
-          <p class="descripcion">Pantalla 6.1", Exynos 2200, cámara triple, Android.</p>
-          <p class="recomendacion">Para usuarios Android que buscan potencia y cámara avanzada.</p>
-          <a href="https://www.pccomponentes.com/samsung-galaxy-s22" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para Samsung Galaxy S22">
-            <label for="nombre-movil-2">Nombre:</label>
-            <input type="text" id="nombre-movil-2" name="nombre" required />
-            <label for="comentario-movil-2">Comentario:</label>
-            <textarea id="comentario-movil-2" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-movil-2">Valoración:</label>
-            <select id="valoracion-movil-2" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
-
-        <!-- Más móviles aquí -->
-      </div>
-    </section>
-
-    <!-- Accesorios -->
-    <section id="accesorios" aria-labelledby="titulo-accesorios">
-      <h2 id="titulo-accesorios">Accesorios Recomendados</h2>
-      <div class="productos-grid">
-        <article class="producto" data-id="accesorio-1">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar cargador Anker PowerPort para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=Anker+PowerPort" alt="Cargador Anker PowerPort" />
-          <h3>Anker PowerPort 4</h3>
-          <p class="precio">29 €</p>
-          <p class="descripcion">Cargador rápido con 4 puertos USB, compacto y fiable.</p>
-          <p class="recomendacion">Ideal para estudiantes que necesitan cargar varios dispositivos simultáneamente.</p>
-          <a href="https://www.pccomponentes.com/anker-powerport-4" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para Anker PowerPort 4">
-            <label for="nombre-accesorio-1">Nombre:</label>
-            <input type="text" id="nombre-accesorio-1" name="nombre" required />
-            <label for="comentario-accesorio-1">Comentario:</label>
-            <textarea id="comentario-accesorio-1" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-accesorio-1">Valoración:</label>
-            <select id="valoracion-accesorio-1" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
-
-        <article class="producto" data-id="accesorio-2">
-          <input type="checkbox" class="comparar" title="Seleccionar para comparar" aria-label="Seleccionar funda para portátil para comparar" />
-          <img src="https://via.placeholder.com/280x160?text=Funda+Portatil" alt="Funda para portátil" />
-          <h3>Funda para portátil 15"</h3>
-          <p class="precio">20 €</p>
-          <p class="descripcion">Protección ligera y resistente para portátiles de hasta 15 pulgadas.</p>
-          <p class="recomendacion">Ideal para estudiantes que llevan su portátil a clase y viajes.</p>
-          <a href="https://www.elcorteingles.es/electronica/A44123456-funda-portatil-15" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a>
-          <div class="comentarios-container" aria-live="polite" aria-relevant="additions" aria-atomic="true"></div>
-          <form class="form-comentarios" aria-label="Formulario de comentarios para Funda para portátil 15 pulgadas">
-            <label for="nombre-accesorio-2">Nombre:</label>
-            <input type="text" id="nombre-accesorio-2" name="nombre" required />
-            <label for="comentario-accesorio-2">Comentario:</label>
-            <textarea id="comentario-accesorio-2" name="comentario" rows="2" required></textarea>
-            <label for="valoracion-accesorio-2">Valoración:</label>
-            <select id="valoracion-accesorio-2" name="valoracion" required>
-              <option value="">Selecciona</option>
-              <option value="5">★★★★★</option>
-              <option value="4">★★★★☆</option>
-              <option value="3">★★★☆☆</option>
-              <option value="2">★★☆☆☆</option>
-              <option value="1">★☆☆☆☆</option>
-            </select>
-            <button type="submit">Enviar</button>
-          </form>
-        </article>
-        <!-- Más accesorios aquí -->
-      </div>
-    </section>
-
-  </main>
-
-  <script>
-    // Animación entrada productos
-    document.addEventListener('DOMContentLoaded', () => {
-      const productos = document.querySelectorAll('.producto');
-      productos.forEach((producto, i) => {
-        setTimeout(() => {
-          producto.style.opacity = '1';
-          producto.style.transform = 'translateY(0)';
-        }, i * 150);
-      });
+  const commentsList = document.getElementById("commentsList");
+  commentsList.innerHTML = "";
+  if (commentsData[id]) {
+    commentsData[id].forEach(c => {
+      const div = document.createElement("div");
+      div.classList.add("comment");
+      div.textContent = `${c.name}: ${c.text}`;
+      commentsList.appendChild(div);
     });
+  }
 
-    // Comparador
-    const checkboxes = document.querySelectorAll('input.comparar');
-    const botonComparar = document.getElementById('boton-comparar');
-    const productosSeleccionadosDiv = document.getElementById('productos-seleccionados');
-    const resultadoComparacion = document.getElementById('resultado-comparacion');
-    let seleccionados = [];
+  document.getElementById("commentForm").dataset.productId = id;
+  document.getElementById("productModal").style.display = "block";
+}
 
-    function actualizarSeleccionados() {
-      seleccionados = Array.from(checkboxes).filter(chk => chk.checked);
-      if (seleccionados.length < 2) {
-        botonComparar.disabled = true;
-        productosSeleccionadosDiv.innerHTML = '<em>Selecciona al menos 2 productos para comparar</em>';
-        resultadoComparacion.innerHTML = '';
-      } else if (seleccionados.length > 3) {
-        botonComparar.disabled = true;
-        productosSeleccionadosDiv.innerHTML = '<em>Sólo se pueden comparar hasta 3 productos</em>';
-        resultadoComparacion.innerHTML = '';
-      } else {
-        botonComparar.disabled = false;
-        productosSeleccionadosDiv.textContent = `Productos seleccionados: ${seleccionados.length}`;
-      }
-    }
+function closeModal() {
+  document.getElementById("productModal").style.display = "none";
+}
 
-    checkboxes.forEach(chk => {
-      chk.addEventListener('change', () => {
-        actualizarSeleccionados();
-      });
-    });
+// Comentarios
+document.getElementById("commentForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+  const id = this.dataset.productId;
+  const name = document.getElementById("commentName").value.trim();
+  const text = document.getElementById("commentText").value.trim();
+  if (!name || !text) return;
+  if (!commentsData[id]) commentsData[id] = [];
+  commentsData[id].push({ name, text });
+  document.getElementById("commentName").value = "";
+  document.getElementById("commentText").value = "";
+  openProduct(parseInt(id));
+});
 
-    function obtenerInfoProducto(articulo) {
-      return {
-        id: articulo.dataset.id,
-        titulo: articulo.querySelector('h3').textContent,
-        precio: articulo.querySelector('.precio').textContent,
-        descripcion: articulo.querySelector('.descripcion').textContent,
-        recomendacion: articulo.querySelector('.recomendacion').textContent,
-        link: articulo.querySelector('a.btn-small').href,
-      };
-    }
+// Cerrar modal clic fuera
+window.onclick = function(event) {
+  if (event.target === document.getElementById("productModal")) {
+    closeModal();
+  }
+};
 
-    botonComparar.addEventListener('click', () => {
-      if (seleccionados.length < 2 || seleccionados.length > 3) return;
-      const productosInfo = seleccionados.map(chk => {
-        return obtenerInfoProducto(chk.closest('article.producto'));
-      });
-
-      // Crear tabla comparación
-      let tabla = `<table aria-label="Tabla de comparación de productos">
-        <thead>
-          <tr>
-            <th>Característica</th>`;
-      productosInfo.forEach(p => {
-        tabla += `<th>${p.titulo}</th>`;
-      });
-      tabla += `</tr></thead><tbody>`;
-
-      const filas = [
-        {label: 'Precio', key: 'precio'},
-        {label: 'Descripción', key: 'descripcion'},
-        {label: 'Recomendación', key: 'recomendacion'},
-        {label: 'Enlace de compra', key: 'link'},
-      ];
-
-      filas.forEach(fila => {
-        tabla += `<tr><td><strong>${fila.label}</strong></td>`;
-        productosInfo.forEach(p => {
-          if (fila.key === 'link') {
-            tabla += `<td><a href="${p.link}" target="_blank" rel="noopener noreferrer" class="btn-small">Comprar</a></td>`;
-          } else {
-            tabla += `<td>${p[fila.key]}</td>`;
-          }
-        });
-        tabla += `</tr>`;
-      });
-
-      tabla += `</tbody></table>`;
-
-      resultadoComparacion.innerHTML = tabla;
-      resultadoComparacion.focus();
-    });
-
-    // Comentarios funcionalidad
-    document.querySelectorAll('.form-comentarios').forEach(form => {
-      form.addEventListener('submit', e => {
-        e.preventDefault();
-        const nombre = form.querySelector('input[name="nombre"]').value.trim();
-        const comentario = form.querySelector('textarea[name="comentario"]').value.trim();
-        const valoracion = form.querySelector('select[name="valoracion"]').value;
-
-        if (!nombre || !comentario || !valoracion) return;
-
-        const contenedorComentarios = form.previousElementSibling; // .comentarios-container
-
-        const estrellas = '★★★★★☆☆☆☆☆'.slice(5 - valoracion, 10 - valoracion);
-
-        // Crear comentario
-        const divComentario = document.createElement('div');
-        divComentario.classList.add('comentario');
-        divComentario.innerHTML = `<strong>${nombre}</strong> <span class="estrellas" aria-label="${valoracion} estrellas">${'★'.repeat(valoracion)}${'☆'.repeat(5 - valoracion)}</span><br>${comentario}`;
-
-        contenedorComentarios.appendChild(divComentario);
-
-        // Limpiar form
-        form.reset();
-      });
-    });
-  </script>
+// Iniciar con todos los productos
+applyFilters();
+</script>
 </body>
 </html>
