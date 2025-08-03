@@ -4,12 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Estudio Tech | Asesoría en Tecnología para Estudiantes y Profesionales</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
     <style>
         /* --- Estilos Generales y Variables CSS --- */
         :root {
             --primary-color: #0070f3;
-            --secondary-color: #004aad;
-            --background-color: #f0f2f5;
+            --secondary-color: #1a2a4b;
+            --background-color: #f0f4f8;
             --card-bg-color: #ffffff;
             --text-color: #2c3e50;
             --light-text-color: #7f8c8d;
@@ -21,20 +22,21 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
         }
         body {
             background-color: var(--background-color);
             color: var(--text-color);
             line-height: 1.6;
+            overflow-x: hidden;
         }
-        a { text-decoration: none; color: var(--primary-color); }
-        a:hover { text-decoration: underline; }
+        a { text-decoration: none; color: var(--primary-color); transition: color 0.3s ease; }
+        a:hover { color: var(--secondary-color); }
 
         /* --- Header y Navegación --- */
         header {
             background: var(--card-bg-color);
-            padding: 1rem 2rem;
+            padding: 1.5rem 3rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -44,13 +46,13 @@
             z-index: 1000;
         }
         header h1 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
             color: var(--secondary-color);
         }
         .main-nav {
             display: flex;
-            gap: 1.5rem;
+            gap: 2rem;
         }
         .main-nav a {
             font-weight: 600;
@@ -59,7 +61,7 @@
             position: relative;
             transition: color 0.3s ease;
         }
-        .main-nav a:hover {
+        .main-nav a:hover, .main-nav a.active {
             color: var(--primary-color);
             text-decoration: none;
         }
@@ -69,52 +71,54 @@
             left: 0;
             bottom: -5px;
             width: 0;
-            height: 2px;
+            height: 3px;
             background-color: var(--primary-color);
             transition: width 0.3s ease;
         }
-        .main-nav a:hover::after {
+        .main-nav a:hover::after, .main-nav a.active::after {
             width: 100%;
         }
 
         /* --- Contenedor Principal y Secciones --- */
         main {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: 3rem;
         }
         .hero-section {
             text-align: center;
-            padding: 4rem 2rem;
-            background: var(--card-bg-color);
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            margin-bottom: 2rem;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--card-bg-color), #eef5ff);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            margin-bottom: 3rem;
         }
         .hero-section h2 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 800;
             color: var(--secondary-color);
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: -1px;
         }
         .hero-section p {
             font-size: 1.2rem;
             color: var(--light-text-color);
-            max-width: 800px;
-            margin: 0 auto 2rem auto;
+            max-width: 900px;
+            margin: 0 auto 3rem auto;
+            line-height: 1.8;
         }
         .profile-selector {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 1rem;
+            gap: 1.2rem;
         }
         .profile-selector button {
             background-color: var(--background-color);
             color: var(--text-color);
-            border: 1px solid var(--border-color);
-            padding: 12px 24px;
-            border-radius: 8px;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 12px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
@@ -123,49 +127,57 @@
         .profile-selector button:hover, .profile-selector button.active {
             background-color: var(--primary-color);
             color: white;
-            border-color: var(--primary-color);
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-light);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 112, 243, 0.3);
         }
         
+        .product-section {
+            margin-bottom: 4rem;
+        }
+        .product-section h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--secondary-color);
+            text-align: center;
+        }
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
         }
         .product-card {
             background-color: var(--card-bg-color);
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: var(--shadow-light);
             cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: fadeIn 0.5s ease forwards;
+            transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            animation: fadeIn 0.8s ease forwards;
             opacity: 0;
             transform: translateY(20px);
         }
         .product-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: var(--shadow-hover);
         }
         .product-card img {
             width: 100%;
-            height: 180px;
+            height: 220px;
             object-fit: cover;
             display: block;
         }
         .product-card .info {
-            padding: 1.5rem;
+            padding: 2rem;
         }
         .product-card .info h4 {
-            font-size: 1.3rem;
+            font-size: 1.4rem;
             font-weight: 700;
             color: var(--secondary-color);
             margin-bottom: 0.5rem;
         }
         .product-card .info p {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 700;
             color: var(--primary-color);
         }
@@ -175,7 +187,7 @@
             display: none;
             position: fixed;
             z-index: 2000;
-            padding-top: 50px;
+            padding: 50px 20px;
             left: 0; top: 0;
             width: 100%; height: 100%;
             background-color: rgba(0,0,0,0.7);
@@ -185,88 +197,182 @@
         .modal-content {
             background-color: var(--card-bg-color);
             margin: auto;
-            padding: 30px;
-            border-radius: 12px;
-            max-width: 800px;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 900px;
             position: relative;
-            animation: slideUp 0.3s ease;
+            animation: slideUp 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
         }
         .modal-close {
             position: absolute;
-            right: 20px; top: 15px;
-            font-size: 2rem;
+            right: 20px; top: 20px;
+            font-size: 2.5rem;
             cursor: pointer;
             color: var(--light-text-color);
         }
-        .modal-close:hover { color: var(--text-color); }
+        .modal-close:hover { color: var(--text-color); transform: rotate(90deg); transition: transform 0.3s ease; }
         .modal-image {
             width: 100%;
             max-height: 400px;
             object-fit: contain;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
+            border-radius: 12px;
         }
-        .modal-details h2 { font-size: 2.2rem; color: var(--secondary-color); margin-bottom: 1rem; }
+        .modal-details h2 { font-size: 2.5rem; color: var(--secondary-color); margin-bottom: 1rem; }
         .modal-details p { color: var(--light-text-color); margin-bottom: 1.5rem; }
-        .modal-details h3 { font-size: 1.4rem; color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.8rem; }
-        .modal-details ul { list-style: none; padding-left: 0; }
+        .modal-details h3 { font-size: 1.6rem; color: var(--primary-color); margin-top: 1.5rem; margin-bottom: 0.8rem; font-weight: 600; }
+        .modal-details ul { list-style: none; padding-left: 0; margin-bottom: 1.5rem;}
         .modal-details li {
             background-color: var(--background-color);
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 8px;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 10px;
             font-size: 1rem;
+            display: flex;
+            align-items: center;
         }
+        .modal-details li::before {
+            content: '✓';
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+        
+        /* --- Valoraciones y Comentarios --- */
+        .comments-section {
+            grid-column: 1 / span 2;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-top: 2rem;
+        }
+        .comments-section h3 {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+        }
+        .rating-stars {
+            color: #f7d921;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .comment-item {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .comment-item strong {
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 5px;
+        }
+        .rating-input {
+            margin-bottom: 1rem;
+        }
+        .rating-input .star-rating {
+            display: inline-block;
+        }
+        .rating-input .star-rating label {
+            font-size: 2rem;
+            color: var(--border-color);
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+        .rating-input .star-rating label:hover,
+        .rating-input .star-rating label:hover ~ label,
+        .rating-input .star-rating input:checked ~ label {
+            color: #f7d921;
+        }
+        .rating-input input { display: none; }
+        
+        .comment-form input, .comment-form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .comment-form input:focus, .comment-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        .comment-form button {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+        .comment-form button:hover { background-color: var(--secondary-color); }
+
+        /* --- Opciones de Compra --- */
         .buy-options {
             margin-top: 2rem;
         }
         .buy-options a {
             display: inline-block;
-            padding: 12px 24px;
+            padding: 14px 28px;
             background-color: var(--primary-color);
             color: white;
-            border-radius: 8px;
+            border-radius: 10px;
             font-weight: 600;
-            margin-right: 1rem;
+            margin-right: 1.2rem;
+            margin-bottom: 1rem;
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
         .buy-options a:hover {
             background-color: var(--secondary-color);
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             text-decoration: none;
         }
 
         /* --- Footer y Contacto --- */
         footer {
             text-align: center;
-            padding: 2rem;
+            padding: 3rem;
             background: var(--secondary-color);
             color: white;
-            margin-top: 2rem;
-            border-radius: 12px;
+            margin-top: 3rem;
+            border-radius: 20px 20px 0 0;
         }
         footer p { margin-bottom: 0.5rem; }
         footer a { color: #81d4fa; }
 
         /* --- Animaciones --- */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
+            from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         @keyframes slideUp {
-            from { transform: translateY(50px); opacity: 0; }
+            from { transform: translateY(100px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
         /* --- Responsive Design --- */
-        @media (max-width: 768px) {
-            header h1 { font-size: 1.5rem; }
+        @media (max-width: 992px) {
+            header { padding: 1.5rem 1.5rem; }
             .main-nav { display: none; }
-            .products-grid { grid-template-columns: 1fr; }
-            .hero-section { padding: 2rem 1rem; }
-            .hero-section h2 { font-size: 2rem; }
-            .profile-selector { justify-content: flex-start; }
-            .profile-selector button { padding: 10px 15px; font-size: 0.9rem; }
+            main { padding: 2rem; }
+            .hero-section { padding: 4rem 1rem; }
+            .hero-section h2 { font-size: 2.2rem; }
+            .hero-section p { font-size: 1rem; }
+            .products-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
+            .modal-content { 
+                grid-template-columns: 1fr; 
+                gap: 20px;
+                padding: 30px;
+            }
         }
     </style>
 </head>
@@ -274,18 +380,18 @@
 <header>
     <h1>Estudio Tech</h1>
     <nav class="main-nav">
-        <a href="#portatiles">Portátiles</a>
-        <a href="#moviles">Móviles</a>
-        <a href="#accesorios">Accesorios</a>
-        <a href="#tablets">Tablets</a>
+        <a href="#portatiles" class="nav-link">Portátiles</a>
+        <a href="#moviles" class="nav-link">Móviles</a>
+        <a href="#tablets" class="nav-link">Tablets</a>
+        <a href="#accesorios" class="nav-link">Accesorios</a>
     </nav>
 </header>
 
 <main>
     <section class="hero-section">
-        <h2>Asesoría Tecnológica para un Futuro Brillante</h2>
+        <h2>Asesoría Tecnológica Personalizada</h2>
         <p>
-            Descubre las mejores herramientas para optimizar tu estudio y trabajo. Selecciona tu perfil y encuentra la tecnología perfecta para alcanzar tus metas.
+            Encuentra la herramienta ideal para tu éxito académico y profesional. Selecciona tu perfil y descubre un mundo de recomendaciones a medida.
         </p>
         <div class="profile-selector">
             <button onclick="filterByProfile('ingenieria')">Ingeniería</button>
@@ -294,29 +400,29 @@
             <button onclick="filterByProfile('programacion')">Programación</button>
             <button onclick="filterByProfile('marketing')">Marketing Digital</button>
             <button onclick="filterByProfile('audiovisual')">Producción Audiovisual</button>
-            <button onclick="filterByProfile('all')" class="active">Todos los Productos</button>
+            <button onclick="filterByProfile('escritor')">Escritor/Periodista</button>
+            <button onclick="filterByProfile('musico')">Músico</button>
         </div>
     </section>
 
-    <section id="portatiles">
-        <h2>Portátiles</h2>
-        <div class="products-grid" data-category="portatiles"></div>
-    </section>
-
-    <section id="moviles">
-        <h2>Móviles</h2>
-        <div class="products-grid" data-category="moviles"></div>
-    </section>
-
-    <section id="tablets">
-        <h2>Tablets</h2>
-        <div class="products-grid" data-category="tablets"></div>
-    </section>
-
-    <section id="accesorios">
-        <h2>Accesorios</h2>
-        <div class="products-grid" data-category="accesorios"></div>
-    </section>
+    <div id="product-list">
+        <section id="portatiles" class="product-section">
+            <h2>Portátiles</h2>
+            <div class="products-grid" data-category="portatiles"></div>
+        </section>
+        <section id="moviles" class="product-section">
+            <h2>Móviles</h2>
+            <div class="products-grid" data-category="moviles"></div>
+        </section>
+        <section id="tablets" class="product-section">
+            <h2>Tablets</h2>
+            <div class="products-grid" data-category="tablets"></div>
+        </section>
+        <section id="accesorios" class="product-section">
+            <h2>Accesorios</h2>
+            <div class="products-grid" data-category="accesorios"></div>
+        </section>
+    </div>
 </main>
 
 <footer>
@@ -327,17 +433,39 @@
 <div id="productModal" class="modal">
     <div class="modal-content">
         <span class="modal-close" onclick="closeModal()">×</span>
-        <img id="modalImage" class="modal-image" src="" alt="" />
+        <div class="modal-image-container">
+            <img id="modalImage" class="modal-image" src="" alt="" />
+        </div>
         <div class="modal-details">
             <h2 id="modalTitle"></h2>
+            <div id="modalRating" class="rating-stars"></div>
             <p id="modalDescription"></p>
             <h3>Características clave</h3>
             <ul id="modalFeaturesList"></ul>
-            <h3>Recomendado para tu perfil</h3>
+            <h3>Recomendado para ti</h3>
             <p id="modalRecommendationsText"></p>
             <div class="buy-options" id="buyLinks">
                 <h3>Opciones de compra</h3>
             </div>
+        </div>
+        
+        <div class="comments-section">
+            <h3>Valoraciones y comentarios (<span id="commentCount">0</span>)</h3>
+            <div id="commentsList"></div>
+            <form id="commentForm" class="comment-form">
+                <div class="rating-input">
+                    <div class="star-rating">
+                        <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 estrellas">★</label>
+                        <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 estrellas">★</label>
+                        <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 estrellas">★</label>
+                        <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 estrellas">★</label>
+                        <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 estrella">★</label>
+                    </div>
+                </div>
+                <input type="text" id="commentName" placeholder="Tu nombre" required />
+                <textarea id="commentText" placeholder="Comparte tu opinión sobre este producto..." required></textarea>
+                <button type="submit">Enviar comentario</button>
+            </form>
         </div>
     </div>
 </div>
@@ -348,74 +476,85 @@
         {id:1,name:"MacBook Air M3",price:1299,category:"portatiles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mba15-midnight-select-202402?wid=904&hei=844&fmt=jpeg&qlt=90&.v=1708367683917",description:"Un portátil ultraligero con el potente chip M3. Rendimiento excepcional para tareas diarias y profesionales, con una batería de hasta 18 horas.",
          features:["Chip Apple M3", "8 GB RAM unificada", "256 GB SSD", "Pantalla Liquid Retina de 15 pulgadas", "Diseño ultraligero"],
          recommendations:{
-           ingenieria: "Ideal para la mayoría de los programas de ingeniería, excepto aquellos que exigen un alto rendimiento gráfico. Batería que dura todo el día.",
-           disenografico: "Fantástico para tareas de diseño. La pantalla con gran precisión de color y el rendimiento del M3 son insuperables.",
-           medicina: "Perfecto para la gestión de archivos y la lectura de documentos. Su fiabilidad y batería son clave para largas jornadas de estudio.",
-           programacion: "Excelente para el desarrollo web y móvil. La terminal de macOS es muy apreciada y su rendimiento es perfecto para compilar código.",
-           marketing: "La mejor herramienta para la gestión de proyectos, presentaciones y análisis de datos en movimiento. Gran pantalla y portabilidad.",
-           audiovisual: "Muy capaz para la edición de foto y vídeo 4K en Final Cut Pro. La optimización del chip M3 es un gran punto a favor.",
+           ingenieria: "Ideal para la mayoría de los programas de ingeniería, excepto los más exigentes.",
+           disenografico: "Fantástico para el diseño gráfico gracias a su pantalla con gran precisión de color.",
+           medicina: "Perfecto para la gestión de archivos y la lectura de documentos. Su fiabilidad y batería son clave.",
+           programacion: "Excelente para el desarrollo web y móvil. Su rendimiento es perfecto para compilar código.",
+           marketing: "La mejor herramienta para la gestión de proyectos y análisis de datos en movimiento.",
+           audiovisual: "Muy capaz para la edición de foto y vídeo en 4K. La optimización del chip M3 es un gran punto a favor.",
+           escritor: "Su diseño ligero y batería de larga duración lo convierten en el compañero ideal para escritores y periodistas.",
+           musico: "Una opción sólida para la producción musical, con gran rendimiento para software como Logic Pro."
          },
          buyLinks:[{name: "Apple Store", url:"https://www.apple.com/es/macbook-air-m3/"},{name: "Amazon", url:"https://www.amazon.es/Apple-2024-MacBook-Air-Chip/dp/B0CX2CJY4V"}]
         },
-        {id:2,name:"Dell XPS 15",price:1899,category:"portatiles",image:"https://i.dell.com/is/image/Dell/xps-15-9530-pdp-polaris-kansas-r-b-00018-black?fmt=png-alpha&wid=5000&hei=5000",description:"El Dell XPS 15 es un potente portátil con una pantalla deslumbrante, ideal para tareas que requieren alto rendimiento gráfico y multitarea.",
+        {id:2,name:"Dell XPS 15",price:1899,category:"portatiles",image:"https://i.dell.com/is/image/Dell/xps-15-9530-pdp-polaris-kansas-r-b-00018-black?fmt=png-alpha&wid=5000&hei=5000",description:"Un potente portátil con una pantalla deslumbrante, ideal para tareas que requieren alto rendimiento gráfico y multitarea.",
          features:["Intel Core i7 de 13ª Gen", "16 GB RAM DDR5", "1 TB SSD", "Pantalla OLED de 15.6 pulgadas", "Tarjeta gráfica dedicada NVIDIA"],
          recommendations:{
            ingenieria: "La mejor opción para software de modelado 3D (CAD) y simulaciones pesadas. Potencia y rendimiento sin compromisos.",
-           disenografico: "Su pantalla OLED con colores vivos es perfecta para la edición profesional de fotos y vídeo. La potencia gráfica maneja cualquier tarea.",
+           disenografico: "Su pantalla OLED con colores vivos es perfecta para la edición profesional de fotos y vídeo.",
            medicina: "Excesivo para las necesidades básicas. Si necesitas ejecutar software de visualización 3D muy específico, esta es tu opción.",
-           programacion: "La potencia ideal para desarrollo de software complejo y virtualización. Gran pantalla para tener múltiples ventanas abiertas.",
-           marketing: "Excelente para gestionar proyectos de gran escala y crear contenido visual, pero puede ser un poco pesado para la portabilidad diaria.",
-           audiovisual: "El portátil perfecto para la edición de vídeo en 4K/8K, efectos especiales y renderizado rápido. La pantalla OLED es un plus."
+           programacion: "La potencia ideal para desarrollo de software complejo y virtualización. Gran pantalla para múltiples ventanas.",
+           marketing: "Excelente para gestionar proyectos de gran escala y crear contenido visual, pero puede ser un poco pesado.",
+           audiovisual: "El portátil perfecto para la edición de vídeo en 4K/8K, efectos especiales y renderizado rápido."
          },
          buyLinks:[{name: "Dell Store", url:"https://www.dell.com/es-es/shop/ordenadores-portatiles-de-dell/xps-15/spd/xps-15-9530-laptop"},{name: "PC Componentes", url:"https://www.pccomponentes.com/dell-xps-15"}]
         },
         {id:3,name:"Lenovo Yoga Slim 7",price:999,category:"portatiles",image:"https://p1-ofp.static.pub/medias/bWFzdGVyfHJvb3R8MjMwNzQ3fGltYWdlL3BuZ3xoMjUvaDJhLzE4Nzg2MTM0MDM5NTgyLnBuZ3w0YjMwOTc0ODU5NTA2YTJkZWZmZWJiMzYyYTc0N2M3MmMwZDg1MjExOWI3YTJkZTM3MzY0NDdkYmM2ZjQ4N2I5/lenovo-yoga-slim-7-14iau7-hero.png",description:"Un portátil ultraportátil y elegante con un excelente equilibrio entre potencia, diseño y precio. Ideal para profesionales y estudiantes que necesitan movilidad.",
          features:["Intel Core i7 de 12ª Gen", "16 GB RAM", "512 GB SSD", "Pantalla de 14 pulgadas OLED", "Diseño de aluminio"],
          recommendations:{
-            ingenieria: "Una opción sólida si buscas portabilidad sin renunciar a la potencia de un Intel i7. No es apto para tareas gráficas pesadas.",
-            disenografico: "Una opción a considerar por su pantalla OLED de gran calidad a un precio muy competitivo. Suficiente para la mayoría de trabajos de diseño.",
+            ingenieria: "Una opción sólida si buscas portabilidad sin renunciar a la potencia de un Intel i7.",
+            disenografico: "Buena opción por su pantalla OLED de gran calidad a un precio muy competitivo. Suficiente para la mayoría de trabajos de diseño.",
             medicina: "Perfecto para la movilidad y la consulta de grandes volúmenes de datos. Su diseño ligero es ideal para llevarlo a todas partes.",
-            programacion: "Una excelente herramienta para el desarrollo de software. Su teclado es muy cómodo y su potencia suficiente para entornos de desarrollo.",
-            marketing: "La mejor relación calidad-precio para profesionales que necesitan un portátil potente y ligero para trabajar en la oficina o en casa.",
-            audiovisual: "Suficiente para proyectos de edición ligeros y previsualización. Su pantalla OLED es un gran atractivo para la visualización de color."
+            programacion: "Una excelente herramienta para el desarrollo de software. Su teclado es muy cómodo y su potencia suficiente.",
+            marketing: "La mejor relación calidad-precio para profesionales que necesitan un portátil potente y ligero.",
+            audiovisual: "Suficiente para proyectos de edición ligeros y previsualización. Su pantalla OLED es un gran atractivo."
          },
          buyLinks:[{name: "Lenovo Store", url:"https://www.lenovo.com/es/es/p/laptops/yoga/yoga-slim-series/yoga-slim-7-14iau7/82b3003rge"},{name: "El Corte Inglés", url:"https://www.elcorteingles.es/electronica/A46830567-apple-iphone-14-128-gb/"}]
         },
-
         // --- MÓVILES ---
-        {id:4,name:"Google Pixel 8 Pro",price:1099,category:"moviles",image:"https://store.google.com/product/pixel_8_pro",description:"El Pixel 8 Pro destaca por su cámara avanzada con inteligencia artificial y un software Android puro. Ideal para quienes valoran la fotografía y la experiencia de usuario.",
+        {id:4,name:"Google Pixel 8 Pro",price:1099,category:"moviles",image:"https://store.google.com/product/pixel_8_pro",description:"El Pixel 8 Pro destaca por su cámara avanzada con IA y software Android puro. Ideal para quienes valoran la fotografía y la experiencia de usuario.",
          features:["Chip Google Tensor G3", "Cámara profesional de 50 MP", "Pantalla de 6.7 pulgadas", "Android puro", "Carga rápida y sin cables"],
          recommendations:{
-            ingenieria: "Excelente para el día a día y para capturar imágenes de proyectos. La IA de Google es muy útil para la organización de la información.",
-            disenografico: "La mejor opción para fotógrafos y diseñadores que necesitan una cámara excepcional y una pantalla con colores fieles a la realidad.",
+            ingenieria: "Excelente para el día a día. La IA de Google es muy útil para la organización de la información.",
+            disenografico: "La mejor opción para fotógrafos y diseñadores que necesitan una cámara excepcional y colores fieles a la realidad.",
             medicina: "La cámara es fantástica para documentar casos y la IA puede ser útil para organizar la información de forma eficiente.",
             programacion: "La opción perfecta para desarrolladores Android, ya que ofrece la experiencia de software más pura de la plataforma.",
-            marketing: "Una herramienta imprescindible para la creación de contenido visual de alta calidad para redes sociales y campañas de marketing.",
+            marketing: "Una herramienta imprescindible para la creación de contenido visual de alta calidad para redes sociales.",
             audiovisual: "Su cámara y las herramientas de IA son perfectas para la creación de contenido visual profesional sin necesidad de una cámara DSLR."
          },
          buyLinks:[{name: "Google Store", url:"https://store.google.com/es/product/pixel_8_pro"},{name: "Amazon", url:"https://www.amazon.es/Google-Pixel-Pro-Smartphone-Desbloqueado/dp/B0BZR2Y7M1"}]
         },
-
+        {id:5,name:"Samsung Galaxy S24 Ultra",price:1459,category:"moviles",image:"https://images.samsung.com/is/image/samsung/p6pim/es/2401/gallery/es-galaxy-s24-ultra-sm-s928bztdeub-539420077?$650_519_PNG$",description:"El Samsung Galaxy S24 Ultra destaca por su versatilidad, su S Pen integrado y su potente cámara con zoom óptico 10x. El smartphone definitivo para la productividad.",
+         features:["S Pen integrado", "Cámara con zoom óptico 10x", "Procesador Snapdragon 8 Gen 3", "Pantalla Dynamic AMOLED 2X"],
+         recommendations:{
+            ingenieria: "Ideal para tomar notas y dibujar esquemas en cualquier lugar con su S Pen, además de su potente rendimiento.",
+            disenografico: "Su pantalla es una de las mejores del mercado para la visualización de colores. El S Pen es perfecto para la edición de imágenes.",
+            medicina: "La mejor herramienta para la toma de notas en el día a día y la consulta de documentos. La cámara permite capturar imágenes clínicas con gran detalle.",
+            programacion: "La potencia de su procesador lo hace ideal para el desarrollo de aplicaciones móviles. El S Pen es útil para anotaciones rápidas.",
+            marketing: "El S Pen facilita la creación de maquetas y anotaciones en presentaciones. La cámara es ideal para la creación de contenido de alta calidad.",
+            audiovisual: "Su potente cámara con zoom óptico y el S Pen lo hacen ideal para la creación de contenido y la edición en el mismo dispositivo."
+         },
+         buyLinks:[{name: "Samsung Store", url:"https://www.samsung.com/es/smartphones/galaxy-s24-ultra/"},{name: "PC Componentes", url:"https://www.pccomponentes.com/samsung-galaxy-s24-ultra"}]
+        },
         // --- TABLETS ---
-        {id:5,name:"iPad Pro M2",price:1199,category:"tablets",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-pro-11-select-wifi-spacegray-202210?wid=940&hei=1112&fmt=png-alpha&.v=1664411130638",description:"La herramienta definitiva para la productividad y la creatividad. El iPad Pro con chip M2 es potente, versátil y compatible con el Apple Pencil de segunda generación.",
+        {id:6,name:"iPad Pro M2",price:1199,category:"tablets",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/ipad-pro-11-select-wifi-spacegray-202210?wid=940&hei=1112&fmt=png-alpha&.v=1664411130638",description:"La herramienta definitiva para la productividad y la creatividad. El iPad Pro con chip M2 es potente, versátil y compatible con el Apple Pencil de segunda generación.",
          features:["Chip Apple M2", "Pantalla Liquid Retina XDR de 12.9 pulgadas", "Compatible con Apple Pencil y Magic Keyboard", "Cámaras profesionales"],
          recommendations:{
-            ingenieria: "La herramienta perfecta para tomar notas, dibujar esquemas y consultar planos de manera digital. Un complemento ideal para el portátil.",
-            disenografico: "Una herramienta de trabajo imprescindible para el diseño, la ilustración y la edición de fotos. El Apple Pencil te da un control total.",
+            ingenieria: "La herramienta perfecta para tomar notas, dibujar esquemas y consultar planos. Un complemento ideal para el portátil.",
+            disenografico: "Una herramienta de trabajo imprescindible para el diseño, la ilustración y la edición de fotos.",
             medicina: "Probablemente la mejor herramienta para el estudio, con la posibilidad de tomar apuntes y anotar en presentaciones de forma intuitiva.",
-            programacion: "Ideal para la gestión de proyectos, la lectura de documentación y el uso de apps complementarias en cualquier lugar.",
+            programacion: "Ideal para la gestión de proyectos, la lectura de documentación y el uso de apps complementarias.",
             marketing: "La herramienta perfecta para presentaciones interactivas, la creación de maquetas y la gestión de contenido visual en la nube.",
             audiovisual: "Excelente para la edición de vídeo con LumaFusion, la creación de storyboards y la previsualización de proyectos en alta calidad."
          },
          buyLinks:[{name: "Apple Store", url:"https://www.apple.com/es/ipad-pro/"},{name: "MediaMarkt", url:"https://www.mediamarkt.es/es/product/_apple-ipad-pro-11-2022-wifi-128gb-gris-espacial-1532912.html"}]
         },
-
         // --- ACCESORIOS ---
-        {id:6,name:"Logitech MX Master 3S",price:109,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s-graphite/gallery/mx-master-3s-top-view-graphite.png?v=1",description:"Un ratón ergonómico diseñado para la productividad y el confort. Sus botones programables y su rueda de desplazamiento ultra-rápida mejoran el flujo de trabajo.",
+        {id:7,name:"Logitech MX Master 3S",price:109,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3s-graphite/gallery/mx-master-3s-top-view-graphite.png?v=1",description:"Un ratón ergonómico diseñado para la productividad y el confort. Sus botones programables y su rueda de desplazamiento ultra-rápida mejoran el flujo de trabajo.",
          features:["Rueda de desplazamiento MagSpeed", "Diseño ergonómico para largas jornadas", "Botones personalizables", "Conectividad multi-dispositivo"],
          recommendations:{
             ingenieria: "Indispensable para el uso de software de diseño asistido por ordenador (CAD) y modelado 3D.",
-            disenografico: "La mejor herramienta para un trabajo preciso en programas de edición de fotos y diseño, gracias a sus botones programables.",
+            disenografico: "La mejor herramienta para un trabajo preciso en programas de edición de fotos y diseño.",
             medicina: "Ideal para la navegación por documentos extensos y para reducir la fatiga en el uso prolongado del ordenador.",
             programacion: "Aumenta la productividad en la navegación de código y la gestión de proyectos. Sus atajos personalizados son muy útiles.",
             marketing: "Mejora la eficiencia en la gestión de proyectos, hojas de cálculo y la creación de presentaciones.",
@@ -423,15 +562,59 @@
          },
          buyLinks:[{name: "Logitech Store", url:"https://www.logitech.com/es-es/products/mice/mx-master-3s.html"},{name: "Amazon", url:"https://www.amazon.es/Logitech-MX-Master-3S-Bluetooth/dp/B09V7N8W47"}]
         },
+        {id:8,name:"Auriculares Sony WH-1000XM5",price:349,category:"accesorios",image:"https://www.sony.es/image/966b9658e46955a15320577a796e625d?fmt=png-alpha&wid=800",description:"La última generación de los auriculares de cancelación de ruido de Sony. Un sonido excepcional y una comodidad inigualable para la concentración total.",
+         features:["Cancelación de ruido líder del sector", "30 horas de batería", "Llamadas nítidas", "Diseño ultraligero y plegable"],
+         recommendations:{
+            ingenieria: "Indispensables para concentrarse en entornos ruidosos. Te permiten aislarte para resolver problemas complejos.",
+            disenografico: "Perfectos para trabajar con música, ya que el sonido de alta fidelidad te ayuda a mantener la creatividad sin distracciones.",
+            medicina: "Una excelente herramienta para estudiar, ya que eliminan las distracciones sonoras externas.",
+            programacion: "Ayudan a mantener la concentración en entornos de oficina con mucho ruido de fondo, mejorando la productividad.",
+            marketing: "Ideales para entornos de oficina abiertos, permitiendo un enfoque total en el trabajo.",
+            audiovisual: "Esenciales para monitorizar audio durante la edición de vídeo o podcasts, garantizando una calidad de sonido profesional."
+         },
+         buyLinks:[{name: "Sony Store", url:"https://www.sony.es/electronics/auriculares-diademas/wh-1000xm5"},{name: "El Corte Inglés", url:"https://www.elcorteingles.es/electronica/A46830567-apple-iphone-14-128-gb/"}]
+        },
+        {id:9,name:"Monitor Samsung Odyssey G9",price:1199,category:"accesorios",image:"https://images.samsung.com/is/image/samsung/p6pim/es/lc49g95tsslxce/gallery/es-odyssey-g9-lc49g95tsslxce-361099-lc49g95tsslxce-532296144?$650_519_PNG$",description:"Un monitor curvo ultra-ancho de 49 pulgadas, ideal para la multitarea extrema. Perfecta para programadores, editores de vídeo y profesionales de finanzas.",
+         features:["49 pulgadas, curvo", "Resolución 5120 x 1440 (Dual QHD)", "Tasa de refresco de 240 Hz", "Tiempo de respuesta de 1 ms"],
+         recommendations:{
+            ingenieria: "La mejor herramienta para la visualización de planos, diseños complejos y grandes bases de datos. Un monitor que sustituye a dos.",
+            disenografico: "Ideal para la edición de vídeo en una línea de tiempo amplia y para la gestión de múltiples programas de diseño simultáneamente.",
+            medicina: "Permite tener varias ventanas abiertas para la consulta de bases de datos y la visualización de imágenes médicas de forma simultánea.",
+            programacion: "El monitor definitivo para la programación, ya que permite tener el código y la previsualización del resultado en una sola pantalla.",
+            marketing: "Mejora la productividad en la gestión de campañas, el análisis de datos y la creación de presentaciones con múltiples ventanas abiertas.",
+            audiovisual: "Ideal para la edición de vídeo y el diseño de sonido. La línea de tiempo extendida es un gran diferenciador."
+         },
+         buyLinks:[{name: "Samsung Store", url:"https://www.samsung.com/es/monitors/gaming/odyssey-g9-g95t-49-inch-curved-lc49g95tsslxce/"},{name: "PC Componentes", url:"https://www.pccomponentes.com/samsung-odyssey-g9"}]
+        }
     ];
 
-    // --- Lógica JavaScript ---
+    const commentsData = {};
     const allProducts = products;
-    
+    let currentProfile = 'all';
+
     document.addEventListener("DOMContentLoaded", () => {
         renderProducts(allProducts);
+        // Activar el botón 'Todos los productos' por defecto si existe
+        const allButton = document.querySelector('.profile-selector button:last-child');
+        if (allButton) {
+            allButton.classList.add('active');
+        }
     });
 
+    // Función para renderizar el rating en estrellas
+    function renderRating(rating) {
+        let stars = '';
+        for (let i = 0; i < 5; i++) {
+            if (i < rating) {
+                stars += '★';
+            } else {
+                stars += '☆';
+            }
+        }
+        return stars;
+    }
+
+    // Función para renderizar los productos en el DOM
     function renderProducts(productsToRender) {
         document.querySelectorAll('.products-grid').forEach(grid => grid.innerHTML = '');
 
@@ -445,7 +628,12 @@
                     <p><strong>${prod.price} €</strong></p>
                 </div>
             `;
-            setTimeout(() => card.style.opacity = 1, index * 100);
+            // Animación al cargar las tarjetas
+            setTimeout(() => {
+                card.style.opacity = 1;
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+
             card.addEventListener("click", () => openProduct(prod.id));
 
             const grid = document.querySelector(`.products-grid[data-category="${prod.category}"]`);
@@ -455,9 +643,14 @@
         });
     }
 
+    // Función para filtrar productos por perfil
     function filterByProfile(profile) {
+        currentProfile = profile;
         document.querySelectorAll('.profile-selector button').forEach(button => button.classList.remove('active'));
-        document.querySelector(`.profile-selector button[onclick="filterByProfile('${profile}')"]`).classList.add('active');
+        const activeButton = document.querySelector(`.profile-selector button[onclick="filterByProfile('${profile}')"]`);
+        if (activeButton) {
+            activeButton.classList.add('active');
+        }
         
         let filteredProducts = allProducts;
         if (profile !== 'all') {
@@ -465,10 +658,12 @@
         }
         renderProducts(filteredProducts);
     }
-
+    
+    // Función para abrir el modal del producto
     function openProduct(id) {
         const prod = allProducts.find(p => p.id === id);
-        
+        if (!prod) return;
+
         document.getElementById("modalTitle").textContent = prod.name;
         document.getElementById("modalImage").src = prod.image;
         document.getElementById("modalDescription").textContent = prod.description;
@@ -477,14 +672,8 @@
         featuresList.innerHTML = prod.features.map(f => `<li>${f}</li>`).join('');
 
         const recommendationsText = document.getElementById("modalRecommendationsText");
-        recommendationsText.innerHTML = "";
-        for (const profile in prod.recommendations) {
-            const profileName = profile.replace('_', ' ').replace(/\b\w/g, l => l.toUpperCase());
-            const p = document.createElement('p');
-            p.innerHTML = `<strong>${profileName}:</strong> ${prod.recommendations[profile]}`;
-            recommendationsText.appendChild(p);
-        }
-
+        recommendationsText.innerHTML = prod.recommendations[currentProfile] || "No hay una recomendación específica para este perfil.";
+        
         const buyLinksContainer = document.getElementById("buyLinks");
         buyLinksContainer.innerHTML = '<h3>Opciones de compra</h3>';
         prod.buyLinks.forEach(link => {
@@ -494,13 +683,64 @@
             a.textContent = `Comprar en ${link.name}`;
             buyLinksContainer.appendChild(a);
         });
+
+        // Cargar y renderizar comentarios
+        loadComments(prod.id);
         
         document.getElementById("productModal").style.display = "flex";
+        document.getElementById("commentForm").dataset.productId = id;
     }
 
+    // Función para cerrar el modal
     function closeModal() {
         document.getElementById("productModal").style.display = "none";
     }
+
+    // Lógica de comentarios
+    function loadComments(productId) {
+        const commentsList = document.getElementById("commentsList");
+        commentsList.innerHTML = "";
+        let totalRating = 0;
+        let commentCount = 0;
+
+        if (commentsData[productId]) {
+            commentsData[productId].forEach(c => {
+                const div = document.createElement("div");
+                div.classList.add("comment-item");
+                div.innerHTML = `
+                    <strong>${c.name}</strong>
+                    <div class="rating-stars">${renderRating(c.rating)}</div>
+                    <p>${c.text}</p>
+                `;
+                commentsList.appendChild(div);
+                totalRating += c.rating;
+                commentCount++;
+            });
+        }
+        document.getElementById("commentCount").textContent = commentCount;
+        
+        // Calcular y mostrar rating promedio
+        const averageRating = commentCount > 0 ? (totalRating / commentCount).toFixed(1) : 0;
+        const modalRating = document.getElementById("modalRating");
+        modalRating.innerHTML = renderRating(Math.round(averageRating));
+    }
+
+    document.getElementById("commentForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const id = parseInt(this.dataset.productId);
+        const name = document.getElementById("commentName").value.trim();
+        const text = document.getElementById("commentText").value.trim();
+        const ratingInput = document.querySelector('input[name="rating"]:checked');
+        const rating = ratingInput ? parseInt(ratingInput.value) : 0;
+        
+        if (!name || !text || rating === 0) return;
+        
+        if (!commentsData[id]) commentsData[id] = [];
+        commentsData[id].push({ name, text, rating });
+        
+        this.reset(); // Limpiar el formulario
+        loadComments(id);
+    });
 
     window.onclick = function(event) {
         if (event.target === document.getElementById("productModal")) {
