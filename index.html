@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Estudio Tech | Recomendaciones de Tecnología para Estudiantes y Trabajadores</title>
+<title>Estudio Tech | Tu Asesor en Tecnología para Estudiantes y Trabajadores</title>
 <style>
   :root {
     --primary-color: #0070f3;
@@ -171,11 +171,16 @@
   #modalTitle { font-size: 2rem; margin-bottom: 1rem; }
   #modalDescription { color: var(--light-text-color); margin-bottom: 1rem; }
   .modal-features, .modal-recommendations {
-    margin-top: 1rem;
-    padding-left: 20px;
+    margin-top: 1.5rem;
   }
-  .modal-features ul { list-style: disc; padding-left: 20px; }
-  .modal-features li { margin-bottom: 5px; }
+  .modal-features ul { list-style: none; padding: 0; }
+  .modal-features li {
+    background-color: var(--hover-bg-color);
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 1rem;
+  }
   .modal-recommendations strong { color: var(--secondary-color); }
   .buy-btn {
     display: inline-block;
@@ -259,6 +264,45 @@
   .contact-info a:hover {
     text-decoration: underline;
   }
+  .profile-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+  }
+  .profile-buttons button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 0.2s ease;
+  }
+  .profile-buttons button:hover {
+    background-color: #0057b8;
+  }
+  #hero-section {
+    background-color: var(--card-bg-color);
+    padding: 3rem;
+    text-align: center;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+  #hero-section h2 {
+    font-size: 2.5rem;
+    color: var(--secondary-color);
+    margin-bottom: 1rem;
+  }
+  #hero-section p {
+    font-size: 1.2rem;
+    color: var(--light-text-color);
+    max-width: 800px;
+    margin: 0 auto 2rem auto;
+  }
+  
   @media (max-width: 768px) {
     header h1 { font-size: 1.2rem; }
     .products-grid { grid-template-columns: 1fr; }
@@ -293,13 +337,17 @@
 </div>
 
 <main>
-  <div class="section-container">
-    <h2>Recomendaciones por Perfil de Estudiante o Profesional</h2>
-    <p>Encuentra el dispositivo perfecto para tus necesidades. Elige un perfil para ver recomendaciones especializadas.</p>
-    <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 1rem;">
-      <button class="buy-btn" onclick="filterByProfile('estudiante_ingenieria')">Ingeniería</button>
-      <button class="buy-btn" onclick="filterByProfile('disenador_grafico')">Diseño Gráfico</button>
-      <button class="buy-btn" onclick="filterByProfile('escritor_viajero')">Escritor/Viajero</button>
+  <div id="hero-section">
+    <h2>Encuentra la tecnología perfecta para ti</h2>
+    <p>
+      En Estudio Tech te ayudamos a elegir el equipo ideal, sea para estudiar, trabajar o crear. Navega por nuestras recomendaciones personalizadas y toma la mejor decisión.
+    </p>
+    <div class="profile-buttons">
+      <button onclick="filterByProfile('estudiante_ingenieria')">Ingeniería</button>
+      <button onclick="filterByProfile('disenador_grafico')">Diseño Gráfico</button>
+      <button onclick="filterByProfile('escritor_viajero')">Escritor/Viajero</button>
+      <button onclick="filterByProfile('creador_contenido')">Creador de Contenido</button>
+      <button onclick="filterByProfile('profesional_finanzas')">Finanzas</button>
     </div>
   </div>
   
@@ -308,20 +356,10 @@
   <div class="section-container" id="contactSection">
     <h2>Contacto</h2>
     <div class="contact-info">
-      <p>Si tienes alguna duda o necesitas una recomendación personalizada, no dudes en contactarme:</p>
+      <p>¿No encuentras lo que buscas o necesitas un consejo personalizado? Contáctame, estoy aquí para ayudarte a elegir el equipo perfecto para tu caso específico.</p>
       <p><strong>Correo electrónico:</strong> <a href="mailto:adelatc1612@gmail.com">adelatc1612@gmail.com</a></p>
       <p><strong>Teléfono:</strong> <a href="tel:+34683188695">683 188 695</a></p>
     </div>
-  </div>
-
-  <div class="section-container" id="aboutSection" style="display: none;">
-    <h2>Sobre Nosotros</h2>
-    <p>
-      Estudio Tech nació con el objetivo de ser tu guía de confianza en el mundo de la tecnología. Sabemos que elegir el equipo adecuado puede ser un desafío, especialmente para estudiantes y profesionales que buscan el mejor equilibrio entre rendimiento, precio y portabilidad.
-    </p>
-    <p>
-      Aquí, no solo encontrarás productos, sino análisis detallados, recomendaciones personalizadas y una comunidad para compartir opiniones.
-    </p>
   </div>
 </main>
 
@@ -359,67 +397,83 @@
 <script>
 const products = [
   {id:1,name:"Lenovo IdeaPad 3",price:599,category:"portatiles",image:"https://img.pccomponentes.com/articles/1006/10064372/1006-lenovo-ideapad-3-15itl6-intel-core-i5-1135g7-8gb-512gb-ssd-156.jpg",description:"Un portátil versátil con un equilibrio perfecto entre rendimiento y precio. Ideal para tareas cotidianas, programación básica y multimedia.",link:"https://www.pccomponentes.com/lenovo-ideapad-3",
-   features:["Intel i5 de 11ª generación", "8 GB RAM", "512 GB SSD", "Pantalla de 15.6 pulgadas"],
+   features:["Intel i5 de 11ª generación", "8 GB RAM", "512 GB SSD", "Pantalla de 15.6 pulgadas", "Diseño ligero y robusto"],
    recommendations:{
-     estudiante_ingenieria: "No recomendado para software de simulación pesada, pero suficiente para programación básica y ofimática.",
-     disenador_grafico: "No recomendado. Requiere más potencia gráfica y una pantalla de mejor calidad.",
-     escritor_viajero: "Excelente opción por su relación calidad-precio y portabilidad moderada."
+     estudiante_ingenieria: "Suficiente para tareas de programación básica y software de ofimática, pero no apto para modelado 3D o simulaciones pesadas.",
+     disenador_grafico: "No recomendado. Requiere más potencia gráfica y una pantalla de mayor precisión de color.",
+     escritor_viajero: "Una excelente opción por su relación calidad-precio. Rinde bien para procesar textos y su batería dura lo suficiente para una jornada de trabajo.",
+     creador_contenido: "Solo para edición de vídeo o foto muy básica. Se recomienda buscar opciones con mejor procesador gráfico.",
+     profesional_finanzas: "Perfecto. Cumple con todas las necesidades de software de hojas de cálculo, gestión de datos y presentaciones sin problemas."
    }
   },
-  {id:2,name:"MacBook Air M1",price:1099,category:"portatiles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mb-air-spacegray-select-202011?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1603332211000",description:"El MacBook Air con el chip M1 ofrece un rendimiento increíble con una autonomía de batería excepcional. Un diseño delgado y ligero lo hace el compañero perfecto para el día a día.",link:"https://www.apple.com/es/macbook-air-m1/",
-   features:["Chip Apple M1", "8 GB RAM unificada", "256 GB SSD", "Pantalla Retina de 13.3 pulgadas"],
+  {id:2,name:"MacBook Air M1",price:1099,category:"portatiles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/mb-air-spacegray-select-202011?wid=452&hei=420&fmt=jpeg&qlt=95&.v=1603332211000",description:"El MacBook Air con el chip M1 ofrece un rendimiento increíble con una autonomía de batería excepcional. Su diseño delgado y ligero lo hace el compañero perfecto para el día a día.",link:"https://www.apple.com/es/macbook-air-m1/",
+   features:["Chip Apple M1", "8 GB RAM unificada", "256 GB SSD", "Pantalla Retina de 13.3 pulgadas", "Increíble duración de batería"],
    recommendations:{
-     estudiante_ingenieria: "Bueno para programación y tareas ligeras, pero podría quedarse corto para software de modelado 3D intensivo.",
-     disenador_grafico: "Fantástico para tareas de diseño gracias a su excelente pantalla y optimización del software.",
-     escritor_viajero: "La mejor opción por su increíble duración de batería, peso ligero y teclado cómodo."
+     estudiante_ingenieria: "Funciona muy bien para programación y la mayoría de las tareas de software. Cuidado con programas muy específicos que solo estén optimizados para Windows.",
+     disenador_grafico: "Fantástico para tareas de diseño gracias a su excelente pantalla, rendimiento gráfico optimizado y la calidad de la gama de colores.",
+     escritor_viajero: "La mejor opción por su increíble duración de batería, peso ligero y teclado cómodo, ideal para trabajar desde cualquier lugar.",
+     creador_contenido: "Perfecto para la edición de fotos y vídeo en 4K. La optimización del chip M1 con software como Final Cut Pro es inigualable.",
+     profesional_finanzas: "Excelente. El ecosistema Apple facilita la sincronización y la seguridad. Es más que suficiente para todas las tareas de análisis y gestión."
    }
   },
   {id:3,name:"iPhone 14",price:999,category:"moviles",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/iphone-14-blue-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1663703842785",description:"Un smartphone potente y fiable con una cámara mejorada y el chip A15 Bionic. Ideal para aquellos inmersos en el ecosistema de Apple.",link:"https://www.apple.com/es/iphone-14/",
-   features:["Pantalla Super Retina XDR de 6.1 pulgadas", "Chip A15 Bionic", "Cámara dual de 12 MP", "Face ID"],
+   features:["Pantalla Super Retina XDR de 6.1 pulgadas", "Chip A15 Bionic", "Cámara dual de 12 MP", "Face ID", "iOS: Integración perfecta"],
    recommendations:{
-     estudiante_ingenieria: "Excelente para el día a día y productividad, con acceso a apps específicas.",
-     disenador_grafico: "Ideal para capturar fotos de alta calidad y usar aplicaciones creativas en movimiento.",
-     escritor_viajero: "Una cámara fantástica para documentar viajes y una batería que dura todo el día."
+     estudiante_ingenieria: "Excelente para el día a día y productividad, con acceso a apps específicas para cálculo y diseño, además de una gran autonomía.",
+     disenador_grafico: "Ideal para capturar fotos de alta calidad y usar aplicaciones creativas en movimiento, gracias a su potente procesador.",
+     escritor_viajero: "Una cámara fantástica para documentar viajes, una batería que dura todo el día y un diseño compacto para llevarlo a todas partes.",
+     creador_contenido: "Un teléfono muy capaz para grabar vídeo de alta calidad y subirlo directamente a redes, con herramientas de edición integradas.",
+     profesional_finanzas: "Seguro y fiable, perfecto para la gestión de correo electrónico, aplicaciones bancarias y comunicaciones profesionales."
    }
   },
   {id:4,name:"Samsung Galaxy S22",price:849,category:"moviles",image:"https://images.samsung.com/is/image/samsung/p6pim/es/2202/gallery/es-galaxy-s22-s901-sm-s901bzkdeub-530682271?$650_519_PNG$",description:"El Galaxy S22 es un buque insignia Android que destaca por su cámara de alta calidad y su rendimiento excepcional. Una opción versátil y completa.",link:"https://www.samsung.com/es/smartphones/galaxy-s22/",
-   features:["Pantalla Dynamic AMOLED 2X de 6.1 pulgadas", "Procesador Exynos 2200", "Cámara triple de 50 MP", "Batería de 3700 mAh"],
+   features:["Pantalla Dynamic AMOLED 2X de 6.1 pulgadas", "Procesador Exynos 2200", "Cámara triple de 50 MP", "Android: Personalizable y abierto"],
    recommendations:{
-     estudiante_ingenieria: "Gran rendimiento para aplicaciones técnicas y una cámara potente para proyectos.",
-     disenador_grafico: "Su pantalla vibrante y su potente cámara lo hacen ideal para la creación de contenido.",
-     escritor_viajero: "Una opción robusta con una cámara versátil para capturar cada momento."
+     estudiante_ingenieria: "Gran rendimiento para aplicaciones técnicas y una cámara potente para proyectos. La personalización de Android es un punto a favor.",
+     disenador_grafico: "Su pantalla vibrante y su potente cámara lo hacen ideal para la creación de contenido y la visualización de diseños con gran fidelidad de color.",
+     escritor_viajero: "Una opción robusta con una cámara versátil para capturar cada momento y un diseño cómodo de usar en el día a día.",
+     creador_contenido: "Excelente para grabar y editar vídeo 8K. Las cámaras ofrecen una calidad increíble para redes sociales y proyectos profesionales.",
+     profesional_finanzas: "Un teléfono versátil y potente que se integra bien con el ecosistema de Google y las aplicaciones de productividad de Microsoft."
    }
   },
   {id:5,name:"Sony WH-1000XM4",price:279,category:"auriculares",image:"https://www.sony.es/image/93bbce75e54b89c8f7e60d8cb5c4c881?fmt=pjpeg&wid=330&bgcolor=FFFFFF&bgc=FFFFFF",description:"Los auriculares de referencia en cancelación de ruido. Son perfectos para sumergirte en el estudio o el trabajo, bloqueando el ruido exterior por completo.",link:"https://www.sony.es/electronics/auriculares-diademas/wh-1000xm4",
-   features:["Cancelación activa de ruido líder", "30 horas de batería", "Sonido de alta calidad", "Detección de voz para pausa automática"],
+   features:["Cancelación activa de ruido líder", "30 horas de batería", "Sonido de alta calidad", "Control de tacto", "Detección de voz para pausa automática"],
    recommendations:{
-     estudiante_ingenieria: "Indispensables para concentrarse en la biblioteca o espacios ruidosos.",
-     disenador_grafico: "Perfectos para trabajar con música, sin distracciones del entorno.",
-     escritor_viajero: "Un must-have para viajes, eliminando el ruido del transporte para una experiencia más relajada."
+     estudiante_ingenieria: "Indispensables para concentrarse en la biblioteca, en casa o en espacios ruidosos. Te permiten aislarte para resolver problemas complejos.",
+     disenador_grafico: "Perfectos para trabajar con música, ya que el sonido de alta fidelidad te ayuda a mantener la creatividad y la concentración sin distracciones.",
+     escritor_viajero: "Un must-have para viajes largos. Eliminan el ruido del avión o el tren para una experiencia más relajada y productiva.",
+     creador_contenido: "Esencial para monitorizar audio durante la edición de vídeo o podcasts, garantizando una calidad de sonido profesional.",
+     profesional_finanzas: "Ideales para entornos de oficina abiertos, permitiendo un enfoque total en el trabajo sin interrupciones."
    }
   },
   {id:6,name:"Apple AirPods Pro",price:249,category:"auriculares",image:"https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/airpods-pro-2nd-gen-select-202209?wid=940&hei=1112&fmt=png-alpha&.v=1660803965869",description:"Los AirPods Pro ofrecen cancelación de ruido y un modo de transparencia, todo en un diseño compacto. La integración con dispositivos Apple es perfecta.",link:"https://www.apple.com/es/airpods-pro/",
-   features:["Cancelación activa de ruido", "Modo de sonido ambiente", "Audio espacial personalizado", "Resistencia al sudor y al agua"],
+   features:["Cancelación activa de ruido", "Modo de sonido ambiente", "Audio espacial personalizado", "Resistencia al sudor y al agua", "Integración con ecosistema Apple"],
    recommendations:{
-     estudiante_ingenieria: "Útiles para llamadas y escuchar clases, pero los Sony son mejores para la concentración total.",
-     disenador_grafico: "Ideal para el día a día, con la comodidad de su tamaño y la integración con el ecosistema Apple.",
-     escritor_viajero: "Perfectos por su portabilidad y versatilidad en cualquier situación."
+     estudiante_ingenieria: "Útiles para llamadas y escuchar clases, pero los Sony son mejores para la concentración total. Su portabilidad es un gran punto a favor.",
+     disenador_grafico: "Ideal para el día a día, con la comodidad de su tamaño y la integración perfecta con el ecosistema Apple para un flujo de trabajo sin interrupciones.",
+     escritor_viajero: "Perfectos por su portabilidad y versatilidad en cualquier situación. El modo de sonido ambiente es muy útil en estaciones de tren o aeropuertos.",
+     creador_contenido: "Excelentes para escuchar audios de referencia mientras se está en movimiento. La latencia baja es muy apreciada en la postproducción.",
+     profesional_finanzas: "Ideales para reuniones virtuales y llamadas. Su discreción y calidad de audio los hacen perfectos para un entorno de trabajo profesional."
    }
   },
   {id:7,name:"Logitech MX Master 3",price:99,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/mice/mx-master-3/gallery/mx-master-3-top-view-graphite.png?v=1",description:"Un ratón ergonómico diseñado para la productividad. Su rueda de desplazamiento MagSpeed es ultra-rápida y su diseño se adapta a la mano.",link:"https://www.logitech.com/es-es/products/mice/mx-master-3.html",
-   features:["Rueda de desplazamiento MagSpeed", "Diseño ergonómico", "Conectividad multi-dispositivo", "Botones personalizables"],
+   features:["Rueda de desplazamiento MagSpeed", "Diseño ergonómico", "Conectividad multi-dispositivo", "Botones personalizables", "Ideal para largas jornadas"],
    recommendations:{
-     estudiante_ingenieria: "Indispensable para un trabajo de precisión en software CAD o de diseño técnico.",
-     disenador_grafico: "Mejora la eficiencia en programas de edición de fotos y diseño, reduciendo la fatiga.",
-     escritor_viajero: "Excelente para largas horas de trabajo, pero quizás demasiado grande para un viaje ligero."
+     estudiante_ingenieria: "Indispensable para un trabajo de precisión en software CAD o de diseño técnico. Reduce la fatiga en largas sesiones de estudio.",
+     disenador_grafico: "Mejora la eficiencia en programas de edición de fotos y diseño, gracias a sus botones personalizables y su precisión.",
+     escritor_viajero: "Excelente para largas horas de trabajo, pero quizás demasiado grande para un viaje ligero. Para el escritorio es una compra obligada.",
+     creador_contenido: "Facilita la edición en la línea de tiempo de programas de vídeo y la gestión de archivos. La precisión es clave.",
+     profesional_finanzas: "La mejor herramienta para la navegación en hojas de cálculo extensas. La rueda de desplazamiento horizontal es un gran diferenciador."
    }
   },
   {id:8,name:"Teclado Logitech K380",price:39,category:"accesorios",image:"https://resource.logitech.com/w_800,c_limit,q_auto,f_auto,dpr_2.0/d_transparent.gif/content/dam/logitech/en/products/keyboards/k380/gallery/k380-keyboard-top-view-rose-gallery.png?v=1",description:"Un teclado Bluetooth compacto y ligero, perfecto para trabajar con tu móvil, tablet o portátil en cualquier lugar. Puedes cambiar de dispositivo con un solo botón.",link:"https://www.logitech.com/es-es/products/keyboards/k380.html",
    features:["Diseño compacto y ligero", "Conexión Bluetooth a 3 dispositivos", "Batería de larga duración", "Teclas cómodas y silenciosas"],
    recommendations:{
-     estudiante_ingenieria: "Útil como teclado secundario, pero un teclado de tamaño completo es mejor para largas sesiones de codificación.",
-     disenador_grafico: "Una opción portátil y elegante para cuando no estás en tu escritorio principal.",
-     escritor_viajero: "El compañero de viaje ideal para escribir en tu tablet o móvil sin llevar un portátil."
+     estudiante_ingenieria: "Útil como teclado secundario, pero un teclado de tamaño completo es mejor para largas sesiones de codificación. Ideal para usar con un iPad.",
+     disenador_grafico: "Una opción portátil y elegante para cuando no estás en tu escritorio principal. No apto para quienes necesitan un teclado numérico.",
+     escritor_viajero: "El compañero de viaje ideal para escribir en tu tablet o móvil sin llevar un portátil. Su ligereza es su principal ventaja.",
+     creador_contenido: "Útil para escribir guiones o subtítulos en un dispositivo móvil. Su portabilidad lo hace ideal para el trabajo de campo.",
+     profesional_finanzas: "Excelente para quienes trabajan con tabletas o dispositivos móviles, pero no es la mejor opción si usas hojas de cálculo intensivamente."
    }
   }
 ];
